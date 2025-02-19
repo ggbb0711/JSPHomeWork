@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-private xmlns="http://www.netbeans.org/ns/project-private/1">
+    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="1">
+        <file>
+            <url>web/newPartsForm.jsp</url>
+            <bookmark id="1">
+                <name/>
+                <line>3</line>
+                <key/>
+            </bookmark>
+        </file>
+    </editor-bookmarks>
+    <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
+        <group>
+            <file>file:/C:/Users/NGHIA/Project/PRJDemos/JSPHomeWork/src/java/dao/PartsDAO.java</file>
+            <file>file:/C:/Users/NGHIA/Project/PRJDemos/JSPHomeWork/web/updatePartsForm.jsp</file>
+            <file>file:/C:/Users/NGHIA/Project/PRJDemos/JSPHomeWork/src/java/controller/PartsServlet.java</file>
+            <file>file:/C:/Users/NGHIA/Project/PRJDemos/JSPHomeWork/src/java/mylib/DBUtils.java</file>
+            <file>file:/C:/Users/NGHIA/Project/PRJDemos/JSPHomeWork/web/partList.jsp</file>
+            <file>file:/C:/Users/NGHIA/Project/PRJDemos/JSPHomeWork/src/java/dao/InvoiceDAO.java</file>
+            <file>file:/C:/Users/NGHIA/Project/PRJDemos/JSPHomeWork/src/java/dto/PartsDTO.java</file>
+            <file>file:/C:/Users/NGHIA/Project/PRJDemos/JSPHomeWork/web/index.jsp</file>
+            <file>file:/C:/Users/NGHIA/Project/PRJDemos/JSPHomeWork/src/java/controller/DeletePartServlet.java</file>
+            <file>file:/C:/Users/NGHIA/Project/PRJDemos/JSPHomeWork/src/java/controller/PartUpdateServlet.java</file>
+            <file>file:/C:/Users/NGHIA/Project/PRJDemos/JSPHomeWork/web/newPartsForm.jsp</file>
+            <file>file:/C:/Users/NGHIA/Project/PRJDemos/JSPHomeWork/src/java/exceptions/InvalidDataException.java</file>
+            <file>file:/C:/Users/NGHIA/Project/PRJDemos/JSPHomeWork/src/java/utils/constant/Pages.java</file>
+            <file>file:/C:/Users/NGHIA/Project/PRJDemos/JSPHomeWork/src/java/exceptions/ValidationException.java</file>
+            <file>file:/C:/Users/NGHIA/Project/PRJDemos/JSPHomeWork/src/java/exceptions/ValidationError.java</file>
+        </group>
+    </open-files>
+</project-private>
