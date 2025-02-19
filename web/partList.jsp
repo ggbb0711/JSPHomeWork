@@ -6,7 +6,7 @@
 
 <div>
     <form action="parts">
-        <input type="search" name="partName" id="partName" placeholder="Enter part name...">
+        <input type="search" name="partName" id="partName" placeholder="Enter part name..." value="<%=request.getParameter("partName")!=null?request.getParameter("partName"):""%>">
         <input type="submit">
     </form>
     

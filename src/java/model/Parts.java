@@ -15,6 +15,22 @@ public class Parts {
     private double purchasePrice;
     private double retailPrice;
 
+    public void setPartID(int partID) {
+        this.partID = partID;
+    }
+
+    public void setPartName(String partName) {
+        this.partName = partName;
+    }
+
+    public void setPurchasePrice(double purchasePrice) {
+        this.purchasePrice = purchasePrice;
+    }
+
+    public void setRetailPrice(double retailPrice) {
+        this.retailPrice = retailPrice;
+    }
+
     public Parts(int partID, String partName, double purchasePrice, double retailPrice) {
         this.partID = partID;
         this.partName = partName;
@@ -24,6 +40,9 @@ public class Parts {
 
     public int getPartID() {
         return partID;
+    }
+
+    public Parts() {
     }
 
     public String getPartName() {

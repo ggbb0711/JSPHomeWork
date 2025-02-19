@@ -18,6 +18,35 @@ import mylib.DBUtils;
  * @author NGHIA
  */
 public class PartsDAO {
+    public static Parts getPartById(int id){
+        String sqlQuery = "SELECT p.partID, p.partName, p.purchasePrice, p.retailPrice from Parts p WHERE p.partID = ?";
+        Parts p = new Parts();
+        try{
+            Connection con = DBUtils.getConnection();
+            PreparedStatement ps = con.prepareStatement(sqlQuery);
+            
+            ps.setInt(1, id);
+            ResultSet rs = ps.executeQuery();
+            if(rs!=null){
+                while(rs.next()){
+                    p.setPartID(rs.getInt("partID"));
+                    p.setPartName(rs.getString("partName"));
+                    p.setPurchasePrice(rs.getDouble("purchasePrice"));
+                    p.setRetailPrice(rs.getDouble("retailPrice"));
+                }
+            }
+            con.close();
+            
+        } catch (ClassNotFoundException ex) {
+            System.out.println(ex);
+            System.out.println("DBUtils not found.");
+        } catch (SQLException ex) {
+            System.out.println("SQL Exception in getting list of prices. Details: ");
+            ex.printStackTrace();
+        }
+        return p;
+    }
+    
     public static ArrayList<Parts> getParts(String partName){
         String sqlQuery = "SELECT p.partID, p.partName, p.purchasePrice, p.retailPrice from Parts p";
         if(!partName.isEmpty()) sqlQuery+=" WHERE p.partName LIKE ?";

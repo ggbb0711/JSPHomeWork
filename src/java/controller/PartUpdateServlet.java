@@ -54,15 +54,24 @@ public class PartUpdateServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String partID = (request.getParameter("partID")!=null)?request.getParameter("partID"):"";
+        int idValue;
         
         try {
-            int idValue = Integer.parseInt(partID);
-            if (idValue <= 0) {
-                response.sendRedirect("parts");
-            }
-        } catch (NumberFormatException e) {
-                response.sendRedirect("parts");
+            idValue = Integer.parseInt(partID);
+            Parts part=PartsDAO.getPartById(idValue);
+            if(part==null) throw new Error("Cannot find part");
+            
+            HashMap<String, String> updatingPart = new HashMap<>();
+            updatingPart.put("partID",String.valueOf(part.getPartID()));
+            updatingPart.put("partName", part.getPartName());
+            updatingPart.put("purchasePrice", String.valueOf(part.getPurchasePrice()));
+            updatingPart.put("retailPrice", String.valueOf(part.getRetailPrice()));
+            request.setAttribute("updating-part", updatingPart);
+        } catch (Exception e) {
+            System.out.println(e);
+            response.sendRedirect("parts");
         }
+        
         
         request.getRequestDispatcher(Pages.UPDATE_PART_PAGE).forward(request,response);
     }

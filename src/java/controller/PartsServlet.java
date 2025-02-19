@@ -72,7 +72,7 @@ public class PartsServlet extends HttpServlet {
         ArrayList<Parts> parts = PartsDAO.getParts(partName);
 
         request.setAttribute("partList",parts);
-        request.getRequestDispatcher(Pages.PART_PAGE).forward(request,response);
+        request.getRequestDispatcher(Pages.PART_PAGE+"?partName="+((partName!=null)?partName:"")).forward(request,response);
     }
     
     private void deletePart(HttpServletRequest request, HttpServletResponse response)
@@ -107,6 +107,8 @@ public class PartsServlet extends HttpServlet {
             priceDTO.validate();
             // call DAO
             Parts part = new Parts(Integer.parseInt(partID),partName,Double.parseDouble(purchasePrice),Double.parseDouble(retailPrice));
+            Parts existingPart = PartsDAO.getPartById(part.getPartID());
+            if(existingPart!=null) throw new InvalidDataException("The part with the id: "+part.getPartID()+" has already existed.");
             Parts createdPart = PartsDAO.create(part);
             if (createdPart==null) {
                 throw new InvalidDataException("Cannot save product to database!");
