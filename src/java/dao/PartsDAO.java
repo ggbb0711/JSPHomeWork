@@ -10,6 +10,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import model.Parts;
 import mylib.DBUtils;
 
@@ -18,9 +20,9 @@ import mylib.DBUtils;
  * @author NGHIA
  */
 public class PartsDAO {
-    public static Parts getPartById(int id){
+    public static Parts getPartById(int id) throws ClassNotFoundException{
         String sqlQuery = "SELECT p.partID, p.partName, p.purchasePrice, p.retailPrice from Parts p WHERE p.partID = ?";
-        Parts p = new Parts();
+        Parts p = null;
         try{
             Connection con = DBUtils.getConnection();
             PreparedStatement ps = con.prepareStatement(sqlQuery);
@@ -29,6 +31,7 @@ public class PartsDAO {
             ResultSet rs = ps.executeQuery();
             if(rs!=null){
                 while(rs.next()){
+                    p=new Parts();
                     p.setPartID(rs.getInt("partID"));
                     p.setPartName(rs.getString("partName"));
                     p.setPurchasePrice(rs.getDouble("purchasePrice"));
@@ -58,7 +61,7 @@ public class PartsDAO {
             int paramIndex = 1;
             if(!partName.isEmpty()){
                 //Using setFloat would create number with incorrect precision
-                ps.setString(paramIndex++, partName);
+                ps.setString(paramIndex++, "%"+partName+"%");
             } 
 
             ResultSet rs = ps.executeQuery();
@@ -116,7 +119,7 @@ public class PartsDAO {
     
     public static Parts update(Parts updatePart){
         boolean status = false;
-        String sqlQuery = "UPDATE Parts SET partName=?,purchasePrice=?,retailPrice=? WHERE id=?";
+        String sqlQuery = "UPDATE Parts SET partName=?,purchasePrice=?,retailPrice=? WHERE partID=?";
         
         try {
             Connection con = DBUtils.getConnection();

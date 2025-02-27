@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package controller;
+package controller.salePerson.part;
 
 import dao.PartsDAO;
 import dto.PartsDTO;
@@ -19,12 +19,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import model.Parts;
 import utils.constant.Pages;
+import utils.constant.Routes;
 
 /**
  *
  * @author NGHIA
  */
-@WebServlet(name = "PartUpdateServlet", urlPatterns = {"/part-update"})
+@WebServlet(name = "PartUpdateServlet", urlPatterns = {Routes.UPDATE_PARTS})
 public class PartUpdateServlet extends HttpServlet {
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -59,21 +60,28 @@ public class PartUpdateServlet extends HttpServlet {
         try {
             idValue = Integer.parseInt(partID);
             Parts part=PartsDAO.getPartById(idValue);
-            if(part==null) throw new Error("Cannot find part");
+            if(part==null) throw new Exception("Cannot find part");
             
             HashMap<String, String> updatingPart = new HashMap<>();
             updatingPart.put("partID",String.valueOf(part.getPartID()));
             updatingPart.put("partName", part.getPartName());
             updatingPart.put("purchasePrice", String.valueOf(part.getPurchasePrice()));
             updatingPart.put("retailPrice", String.valueOf(part.getRetailPrice()));
+            
+            HashMap<String, String> formData = new HashMap<>();
+            formData.put("partName", part.getPartName());
+            formData.put("purchasePrice", String.valueOf(part.getPurchasePrice()));
+            formData.put("retailPrice", String.valueOf(part.getRetailPrice()));
+            
+            request.setAttribute("formData", formData);
             request.setAttribute("updating-part", updatingPart);
+            request.getRequestDispatcher(Pages.UPDATE_PART_PAGE+"?partID="+partID).forward(request,response);
         } catch (Exception e) {
             System.out.println(e);
-            response.sendRedirect("parts");
+            request.setAttribute("message", "The partId cannot be found");
+            request.getRequestDispatcher(Pages.MISSING_404_ERROR_PAGE).forward(request,response);
         }
         
-        
-        request.getRequestDispatcher(Pages.UPDATE_PART_PAGE).forward(request,response);
     }
 
     /**
@@ -92,7 +100,14 @@ public class PartUpdateServlet extends HttpServlet {
         String purchasePrice = request.getParameter("purchasePrice");
         String retailPrice = request.getParameter("retailPrice");
         
-        // Save user input to persist in form
+        String updatingPartId = request.getParameter("updating-partId");
+        
+        HashMap<String, String> updatingPart = new HashMap<>();
+        updatingPart.put("partID",updatingPartId);
+        updatingPart.put("partName", request.getParameter("updating-partName"));
+        updatingPart.put("purchasePrice", request.getParameter("updating-purchasePrice"));
+        updatingPart.put("retailPrice", request.getParameter("updating-retailPrice"));
+        
         HashMap<String, String> formData = new HashMap<>();
         formData.put("partName", partName);
         formData.put("purchasePrice", purchasePrice);
@@ -100,7 +115,7 @@ public class PartUpdateServlet extends HttpServlet {
         
         PartsDTO priceDTO = new PartsDTO(partID,partName,purchasePrice,retailPrice);
         try {
-            priceDTO.validate();
+            priceDTO.validateUpdate();
             // call DAO
             Parts part = new Parts(Integer.parseInt(partID),partName,Double.parseDouble(purchasePrice),Double.parseDouble(retailPrice));
             Parts createdPart = PartsDAO.update(part);
@@ -113,12 +128,14 @@ public class PartUpdateServlet extends HttpServlet {
         catch (ValidationException ex) {
             request.setAttribute("validation-err", ex.getErrors());
             request.setAttribute("formData", formData);
-            request.getRequestDispatcher("part-update").forward(request, response);
+            request.setAttribute("updating-part", updatingPart);
+            request.getRequestDispatcher(Pages.UPDATE_PART_PAGE+"?partID="+partID).forward(request, response);
         }
         catch(InvalidDataException ex){
             request.setAttribute("invalid-data-exception", ex.getMessage());
             request.setAttribute("formData", formData);
-            request.getRequestDispatcher("part-update").forward(request, response);
+            request.setAttribute("updating-part", updatingPart);
+            request.getRequestDispatcher(Pages.UPDATE_PART_PAGE+"?partID="+partID).forward(request, response);
         }
     }
 

@@ -5,9 +5,12 @@
  */
 package dto;
 
+import dao.PartsDAO;
 import exceptions.ValidationError;
 import exceptions.ValidationException;
 import java.util.HashMap;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -25,22 +28,12 @@ public class PartsDTO{
         this.purchasePrice = purchasePrice;
         this.retailPrice = retailPrice;
     }
+    
+    public void validateUpdate() throws ValidationException{
+        HashMap<String,String> errors = new HashMap<>();
 
-    public void validate() throws ValidationException {
-         HashMap<String,String> errors = new HashMap<>();
-
-        //validate id
-        try {
-            int idValue = Integer.parseInt(partID);
-            if (idValue <= 0) {
-                errors.put("id", "Part ID must be greater than 0.");
-            }
-        } catch (NumberFormatException e) {
-            errors.put("id", "Part ID must be an integer.");
-        }
-         
         //validate name
-        if (partName == null || partName.trim().isEmpty()) errors.put("name", "Part name cannot be empty.");
+        if (partName == null || partName.trim().isEmpty()) errors.put("partName", "Part name cannot be empty.");
         
         // validate price
         try {
@@ -49,7 +42,51 @@ public class PartsDTO{
                 errors.put("purchasePrice", "Purchase price must be greater than 0.");
             }
         } catch (NumberFormatException e) {
-            errors.put("price", "Purchase price must be a valid number.");
+            errors.put("purchasePrice", "Purchase price must be a valid number.");
+        }
+        
+        try {
+            double priceValue = Double.valueOf(retailPrice);
+            if (priceValue <= 0) {
+                errors.put("retailPrice", "Retail price must be greater than 0.");
+            }
+        } catch (NumberFormatException e) {
+            errors.put("retailPrice", "Retail price must be a valid number.");
+        }
+        
+        
+        if (!errors.isEmpty()) {
+            throw new ValidationException(errors);
+        }
+    }
+
+    public void validate() throws ValidationException {
+         HashMap<String,String> errors = new HashMap<>();
+
+        //validate id
+        try {
+            int idValue = Integer.parseInt(partID);
+            if (idValue <= 0) {
+                errors.put("partID", "Part ID must be greater than 0.");
+            }
+            if(PartsDAO.getPartById(idValue)!=null) errors.put("partID", "Part ID has already existed");
+        } catch (NumberFormatException e) {
+            errors.put("partID", "Part ID must be an integer.");
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(PartsDTO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+         
+        //validate name
+        if (partName == null || partName.trim().isEmpty()) errors.put("partName", "Part name cannot be empty.");
+        
+        // validate price
+        try {
+            double priceValue = Double.valueOf(purchasePrice);
+            if (priceValue <= 0) {
+                errors.put("purchasePrice", "Purchase price must be greater than 0.");
+            }
+        } catch (NumberFormatException e) {
+            errors.put("purchasePrice", "Purchase price must be a valid number.");
         }
         
         try {

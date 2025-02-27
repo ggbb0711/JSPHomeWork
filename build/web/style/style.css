@@ -1,0 +1,160 @@
+:root{
+    --main-green: rgb(0,166,81);
+    --main-black: rgb(44,44,44);
+    --danger: rgb(220,53,69);
+}
+
+*{
+    color: var(--main-black);
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+body{
+    background-color: #f2f2f2;
+}
+
+a{
+    text-decoration: none;
+}
+
+.header{
+    display:flex;
+    background: var(--main-green);
+    color: white;
+    align-items: center;
+    justify-content: space-between;
+    padding: 8px;
+}
+
+.sub-header{
+    display:flex;
+    background: var(--main-black);
+    color: white;
+    align-items: center;
+    padding: 4px 8px;
+}
+
+.header-navs{
+    display:flex;
+    margin: 4px;
+    align-items: center;
+    gap: 8px;
+}
+
+.sub-header-navs{
+    display:flex;
+    margin: 4px;
+    align-items: center;
+    gap: 8px;
+}
+
+.sub-header-nav{
+    color: white;
+}
+
+.header-nav:hover{
+    color:white;
+}
+
+.sub-header-nav:hover{
+}
+
+.page-container{
+    padding: 20px;
+}
+
+/*FORM SECTION STARTS*/
+
+/* Style inputs with type="text", select elements and textareas */
+.form-control {
+  width: 100%; /* Full width */
+  padding: 12px; /* Some padding */ 
+  border: 1px solid #ccc; /* Gray border */
+  border-radius: 4px; /* Rounded borders */
+  box-sizing: border-box; /* Make sure that padding and width stays in place */
+  resize: vertical /* Allow the user to vertically resize the textarea (not horizontally) */
+}
+
+.form-input-container{
+    margin-top: 6px; /* Add a top margin */
+    margin-bottom: 16px; /* Bottom margin */
+}
+
+/* Style the submit button with a specific background color etc */
+.form-submit-btn {
+  background-color: var(--main-green);
+  color: white;
+  padding: 12px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+/* When moving the mouse over the submit button, add a darker green color */
+.form-submit-btn:hover {
+  background-color: #45a049;
+}
+
+/* Add a background color and some padding around the form */
+.form-container {
+  border-radius: 5px;
+  background-color: #f2f2f2;
+  padding: 20px;
+}
+
+.form-error-input{
+    color: var(--danger);
+    font-size: 12px;
+}
+
+/*FORM SECTION ENDS*/
+
+
+/*TABLE SECTION STARTS*/
+.scrollable-table{
+    height: 500px;
+    overflow: auto;
+}
+
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+table td, table th {
+  border: 1px solid #ddd;
+}
+
+table tr:nth-child(even){background-color: #f2f2f2;}
+
+table tr:hover {background-color: #ddd;}
+
+table th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: var(--main-green);
+  color: white;
+}
+/*TABLE SECTION HERE*/
+
+.btn{
+    color: white;
+    padding: 4px 8px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;  
+}
+
+.btn-danger{
+    background: var(--danger);
+}
+
+.btn-primary{
+    background: var(--main-green);
+}
+
+.part-search-input{
+    width: auto;
+}

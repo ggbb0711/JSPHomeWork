@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package controller;
+package controller.salePerson.part;
 
 import dao.PartsDAO;
 import dto.PartsDTO;
@@ -11,9 +11,9 @@ import exceptions.InvalidDataException;
 import exceptions.ValidationException;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.HashSet;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -21,14 +21,15 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import model.Parts;
 import utils.constant.Pages;
+import utils.constant.Routes;
 
 /**
  *
  * @author NGHIA
  */
-@WebServlet(name = "PartsServlet", urlPatterns = {"/parts"})
-public class PartsServlet extends HttpServlet {
-    
+@WebServlet(name = "CreatePartsServlet", urlPatterns = {Routes.CREATE_PARTS})
+public class CreatePartsServlet extends HttpServlet {
+
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -41,55 +42,34 @@ public class PartsServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        String action = request.getParameter("action");
-        String method = request.getMethod();
-        
+    }
 
-        if("POST".equals(method)){
-           switch(action){
-               case "delete":
-                   deletePart(request,response);
-                   break;
-               default:
-                createNewPart(request,response);
-                break;
-           } 
-        }
-        else if("GET".equals(method)){
-            switch(action){
-                default:
-                    printPartList(request,response);
-                    break;
-            }
-        }
-        else printPartList(request,response);
+    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
+    /**
+     * Handles the HTTP <code>GET</code> method.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        request.getRequestDispatcher(Pages.CREATE_PART_PAGE).forward(request,response);
     }
-    
-    private void printPartList(HttpServletRequest request, HttpServletResponse response)
-        throws ServletException, IOException {
-        String partName = request.getParameter("partName");
-        
-        ArrayList<Parts> parts = PartsDAO.getParts(partName);
 
-        request.setAttribute("partList",parts);
-        request.getRequestDispatcher(Pages.PART_PAGE+"?partName="+((partName!=null)?partName:"")).forward(request,response);
-    }
-    
-    private void deletePart(HttpServletRequest request, HttpServletResponse response)
-        throws ServletException, IOException {
-        String partId = request.getParameter("partID");
-        
-        try{
-            boolean hasDeleted = PartsDAO.delete(Integer.parseInt(partId));
-        }
-        catch(Exception ex){
-            System.out.println(ex);
-            request.getRequestDispatcher(Pages.PART_PAGE).forward(request,response);
-        }
-    }
-    
-    private void createNewPart(HttpServletRequest request, HttpServletResponse response)
-        throws ServletException, IOException {
+    /**
+     * Handles the HTTP <code>POST</code> method.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
         String partID = request.getParameter("partID");
         String partName = request.getParameter("partName");
         String purchasePrice = request.getParameter("purchasePrice");
@@ -113,31 +93,21 @@ public class PartsServlet extends HttpServlet {
             if (createdPart==null) {
                 throw new InvalidDataException("Cannot save product to database!");
             } else {
-                response.sendRedirect("parts");
+                response.sendRedirect(Routes.PARTS);
             }
         }
         catch (ValidationException ex) {
             request.setAttribute("validation-err", ex.getErrors());
             request.setAttribute("formData", formData);
-            request.getRequestDispatcher(Pages.PART_PAGE).forward(request, response);
+            request.getRequestDispatcher(Pages.CREATE_PART_PAGE).forward(request, response);
         }
         catch(InvalidDataException ex){
             request.setAttribute("invalid-data-exception", ex.getMessage());
             request.setAttribute("formData", formData);
-            request.getRequestDispatcher(Pages.PART_PAGE).forward(request, response);
+            request.getRequestDispatcher(Pages.CREATE_PART_PAGE).forward(request, response);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(PartsServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }
-    
-    @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        processRequest(request,response);
-    }
-    
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        processRequest(request,response);
     }
 
     /**

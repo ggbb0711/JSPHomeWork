@@ -15,9 +15,10 @@ public class SalesInvoice {
     private int id;
     private Date invoiceDate;
     private String salesID;
-    private int carID;
-    private int custID;
-
+    private long carID;
+    private long custID;
+    private Car car;
+    
     public SalesInvoice() {
         id = 0;
         invoiceDate = null;
@@ -26,7 +27,7 @@ public class SalesInvoice {
         custID = 0;
     }
 
-    public SalesInvoice(int id, Date invoiceDate, String salesID, int carID, int custID) {
+    public SalesInvoice(int id, Date invoiceDate, String salesID, long carID, long custID) {
         this.id = id;
         this.invoiceDate = invoiceDate;
         this.salesID = salesID;
@@ -58,20 +59,28 @@ public class SalesInvoice {
         this.salesID = salesID;
     }
 
-    public int getCarID() {
+    public long getCarID() {
         return carID;
     }
 
-    public void setCarID(int carID) {
+    public void setCarID(long carID) {
         this.carID = carID;
     }
 
-    public int getCustID() {
+    public long getCustID() {
         return custID;
     }
 
-    public void setCustID(int custID) {
+    public void setCustID(long custID) {
         this.custID = custID;
+    }
+
+    public void setCar(Car car) {
+        this.car = car;
+    }
+
+    public Car getCar() {
+        return car;
     }
     
     

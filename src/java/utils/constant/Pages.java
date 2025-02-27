@@ -10,6 +10,9 @@ package utils.constant;
  * @author NGHIA
  */
 public class Pages {
-    public static String PART_PAGE = "partList.jsp";
-    public static String UPDATE_PART_PAGE = "updatePartsForm.jsp";
+    public static String PART_PAGE = "/views/salePerson/parts/partPage.jsp";
+    public static String UPDATE_PART_PAGE = "/views/salePerson/parts/updatePartPage.jsp";
+    public static String CREATE_PART_PAGE = "/views/salePerson/parts/newPartsPage.jsp";
+    public static String MISSING_404_ERROR_PAGE ="/views/salePerson/404Page.jsp";
+    public static String STATS_PAGE = "/views/salePerson/stats/statsPage.jsp";
 }

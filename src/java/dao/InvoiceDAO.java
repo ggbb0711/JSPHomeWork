@@ -9,7 +9,13 @@ import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import model.Car;
+import model.CarRevenueData;
+import model.CarSoldData;
 import model.SalesInvoice;
 import mylib.DBUtils;
 
@@ -21,7 +27,7 @@ public class InvoiceDAO {
     //ham nay dung de lay cac invoice cua 1 customer
     //input: id khach hang
     //output: ArrayList<SalesInvoice>
-    public ArrayList<SalesInvoice> getAllInvoice(int custID,String salesID){
+    public static ArrayList<SalesInvoice> getAllInvoice(long custID,String salesID){
         ArrayList<SalesInvoice> result = new ArrayList<>();
         Connection cn=null;
         try{
@@ -31,7 +37,7 @@ public class InvoiceDAO {
                              "from dbo.SalesInvoice\n" +
                              "where [custID] = ? and [salesID] = ?";
                 PreparedStatement pst = cn.prepareStatement(sql);
-                pst.setInt(1, custID);
+                pst.setLong(1, custID);
                 pst.setString(2, salesID);
                 ResultSet table = pst.executeQuery();
                 if(table!=null){
@@ -58,4 +64,74 @@ public class InvoiceDAO {
         return result;
     }
     
+    
+    public static ArrayList<CarSoldData> getCarSoldByYear(long salesID, int year){
+        ArrayList<CarSoldData> carSoldDataList = new ArrayList<>();
+        String query = "SELECT c.carID, c.serialNumber, c.model, c.colour, c.year, COUNT(si.invoiceID) AS carSold " +
+                       "FROM SalesInvoice si " +
+                       "JOIN Cars c ON si.carID = c.carID " +
+                       "WHERE si.salesID = ? AND YEAR(si.invoiceDate) = ? " +
+                       "GROUP BY c.carID, c.serialNumber, c.model, c.colour, c.year " +
+                       "ORDER BY carSold DESC";
+
+        try (Connection conn = DBUtils.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(query)) {
+            stmt.setLong(1, salesID);
+            stmt.setInt(2, year);
+            ResultSet rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                int carID = rs.getInt("carID");
+                String serialNumber = rs.getString("serialNumber");
+                String model = rs.getString("model");
+                String colour = rs.getString("colour");
+                int carYear = rs.getInt("year");
+                int carSold = rs.getInt("carSold");
+
+                Car car = new Car(carID, serialNumber, model, colour, carYear);
+                carSoldDataList.add(new CarSoldData(carSold, car, year));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(InvoiceDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return carSoldDataList;
+    }
+    
+    public static ArrayList<CarRevenueData> getCarRevenueByYear(long salesID, int year){
+        ArrayList<CarRevenueData> carRevenueDataList = new ArrayList<>();
+        String query = "SELECT c.carID, c.serialNumber, c.model, c.colour, c.year, SUM(si.revenue) AS carSold " +
+                       "FROM SalesInvoice si " +
+                       "JOIN Cars c ON si.carID = c.carID " +
+                       "WHERE si.salesID = ? AND YEAR(si.invoiceDate) = ? " +
+                       "GROUP BY c.carID, c.serialNumber, c.model, c.colour, c.year " +
+                       "ORDER BY carSold DESC";
+
+        try (Connection conn = DBUtils.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(query)) {
+            stmt.setLong(1, salesID);
+            stmt.setInt(2, year);
+            ResultSet rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                int carID = rs.getInt("carID");
+                String serialNumber = rs.getString("serialNumber");
+                String model = rs.getString("model");
+                String colour = rs.getString("colour");
+                int carYear = rs.getInt("year");
+                int carSold = rs.getInt("carSold");
+
+                Car car = new Car(carID, serialNumber, model, colour, carYear);
+                carRevenueDataList.add(new CarRevenueData(carSold, car, year));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(InvoiceDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return carRevenueDataList;
+    }
 }
