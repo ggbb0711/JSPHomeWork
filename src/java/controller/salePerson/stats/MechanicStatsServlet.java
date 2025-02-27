@@ -5,17 +5,15 @@
  */
 package controller.salePerson.stats;
 
-import dao.InvoiceDAO;
+import dao.MechanicDAO;
 import java.io.IOException;
-import java.time.Year;
 import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import model.CarRevenueData;
-import model.CarSoldData;
+import model.TopMechanicData;
 import utils.constant.Pages;
 import utils.constant.Routes;
 
@@ -23,8 +21,8 @@ import utils.constant.Routes;
  *
  * @author NGHIA
  */
-@WebServlet(name = "StatsServlet", urlPatterns = {Routes.STATS})
-public class StatsServlet extends HttpServlet {
+@WebServlet(name = "MechanicStatsServlet", urlPatterns = {Routes.STATS_TOP_MECHANIC})
+public class MechanicStatsServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -52,25 +50,9 @@ public class StatsServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        int currentYear = Year.now().getValue();
-        
-        Integer carSoldByYear = currentYear;
-        Integer carRevenueByYear =currentYear;
-        
-        try{
-            carSoldByYear = Integer.parseInt(request.getParameter("carSoldByYear"));
-            carRevenueByYear = Integer.parseInt(request.getParameter("carRevenueByYear"));
-        }
-        catch(Exception ex){
-            System.out.println(ex);
-        }
-        
-        ArrayList<CarSoldData> carSoldDataList = InvoiceDAO.getCarSoldByYear(30121050038l,carSoldByYear);
-        ArrayList<CarRevenueData> carRevenueDataList = InvoiceDAO.getCarRevenueByYear(30121050038l,carRevenueByYear);
-
-        request.setAttribute("carSoldDataList", carSoldDataList);
-        request.setAttribute("carRevenueDataList", carRevenueDataList);
-        request.getRequestDispatcher(Pages.STATS_PAGE).forward(request,response);
+        ArrayList<TopMechanicData> topMechanicData = MechanicDAO.getTopMechanic();
+        request.setAttribute("topMechanicData", topMechanicData);
+        request.getRequestDispatcher(Pages.STATS_TOP_3_MECHANIC_PAGE).forward(request,response);
     }
 
     /**

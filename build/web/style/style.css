@@ -57,6 +57,7 @@ a{
 }
 
 .sub-header-nav:hover{
+    color: var(--main-green);
 }
 
 .page-container{
@@ -112,7 +113,7 @@ a{
 
 /*TABLE SECTION STARTS*/
 .scrollable-table{
-    height: 500px;
+    max-height: 300px;
     overflow: auto;
 }
 
@@ -124,6 +125,7 @@ table {
 
 table td, table th {
   border: 1px solid #ddd;
+  padding: 16px;
 }
 
 table tr:nth-child(even){background-color: #f2f2f2;}

@@ -15,4 +15,6 @@ public class Pages {
     public static String CREATE_PART_PAGE = "/views/salePerson/parts/newPartsPage.jsp";
     public static String MISSING_404_ERROR_PAGE ="/views/salePerson/404Page.jsp";
     public static String STATS_PAGE = "/views/salePerson/stats/statsPage.jsp";
+    public static String STATS_PARTS_USED_PAGE = "/views/salePerson/stats/partsUsedStatsPage.jsp";
+    public static String STATS_TOP_3_MECHANIC_PAGE = "/views/salePerson/stats/topMechanicPage.jsp";
 }
