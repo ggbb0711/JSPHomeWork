@@ -16,8 +16,10 @@
         <link rel="stylesheet" href="${pageContext.request.contextPath}/style/style.css">
     </head>
     <body>
-        <jsp:include page="/views/salePerson/components/header.jsp"></jsp:include>
-        <jsp:include page="./components/subHeader.jsp"></jsp:include>
+        <div class="sticky-header">
+            <jsp:include page="/views/salePerson/components/header.jsp"></jsp:include>
+            <jsp:include page="./components/subHeader.jsp"></jsp:include>
+        </div>   
         <div class="page-container">
             <form method="GET" action="${pageContext.request.contextPath}/sales-person/stats">
                 <div>

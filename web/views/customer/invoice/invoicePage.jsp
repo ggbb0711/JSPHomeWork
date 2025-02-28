@@ -1,6 +1,6 @@
 <%-- 
-    Document   : newPartsPage
-    Created on : Feb 27, 2025, 1:12:37 PM
+    Document   : invoicePage
+    Created on : Feb 28, 2025, 9:41:59 AM
     Author     : NGHIA
 --%>
 
@@ -9,16 +9,17 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>New Parts</title>
+        <title>Your invoices</title>
         <link rel="stylesheet" href="${pageContext.request.contextPath}/style/reset.css">
         <link rel="stylesheet" href="${pageContext.request.contextPath}/style/style.css">
     </head>
     <body>
         <div class="sticky-header">
-            <jsp:include page="/views/salePerson/components/header.jsp"></jsp:include>
-        </div>
+            <jsp:include page="/views/customer/components/header.jsp"></jsp:include>
+        </div>  
         <div class="page-container">
-            <jsp:include page="./components/newPartsForm.jsp"></jsp:include>
+            <h1>YOUR INVOICES</h1>
+            <jsp:include page="./components/invoiceTable.jsp"></jsp:include>
         </div>
     </body>
 </html>

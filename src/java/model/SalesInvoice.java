@@ -18,6 +18,7 @@ public class SalesInvoice {
     private long carID;
     private long custID;
     private Car car;
+    private long revenue;
     
     public SalesInvoice() {
         id = 0;
@@ -81,6 +82,14 @@ public class SalesInvoice {
 
     public Car getCar() {
         return car;
+    }
+
+    public long getRevenue() {
+        return revenue;
+    }
+
+    public void setRevenue(long revenue) {
+        this.revenue = revenue;
     }
     
     

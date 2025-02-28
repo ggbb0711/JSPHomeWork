@@ -34,6 +34,11 @@ a{
     padding: 4px 8px;
 }
 
+.sticky-header{
+    position: sticky;
+    top: 0px;
+}
+
 .header-navs{
     display:flex;
     margin: 4px;

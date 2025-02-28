@@ -16,8 +16,9 @@
         <link rel="stylesheet" href="${pageContext.request.contextPath}/style/style.css">
     </head>
     <body>
-        <jsp:include page="/views/salePerson/components/header.jsp"></jsp:include>
-        <div class="page-container">
+        <div class="sticky-header">
+            <jsp:include page="/views/salePerson/components/header.jsp"></jsp:include>
+        </div>        <div class="page-container">
             <a href="${pageContext.request.contextPath}/sales-person/CreatePartsServlet">
                 <button class="btn btn-primary">+ Add</button>
             </a>

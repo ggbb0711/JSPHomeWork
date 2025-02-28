@@ -64,6 +64,45 @@ public class InvoiceDAO {
         return result;
     }
     
+    public static ArrayList<SalesInvoice> getCarRevenueByUserID(long custID){
+        ArrayList<SalesInvoice> userInvoices = new ArrayList<>();
+        String query = "SELECT ca.*,invoiceDate, revenue FROM Customer c" +
+            " JOIN SalesInvoice si ON c.custID=si.custID" +
+            " JOIN Cars ca ON ca.carID = si.carID" +
+            " WHERE c.custID = ?"
+            + " ORDER BY invoiceDate DESC";
+        
+        try (Connection conn = DBUtils.getConnection();
+        PreparedStatement stmt = conn.prepareStatement(query)) {
+                stmt.setLong(1, custID);
+                ResultSet rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                int carID = rs.getInt("carID");
+                String serialNumber = rs.getString("serialNumber");
+                String model = rs.getString("model");
+                String colour = rs.getString("colour");
+                int carYear = rs.getInt("year");
+                Long carRevenue = rs.getLong("revenue");
+                Date invoiceDate = rs.getDate("invoiceDate");
+
+                Car car = new Car(carID, serialNumber, model, colour, carYear);
+                SalesInvoice invoice = new SalesInvoice();
+                invoice.setCar(car);
+                invoice.setInvoiceDate(invoiceDate);
+                invoice.setRevenue(carRevenue);
+                
+                userInvoices.add(invoice);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(InvoiceDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return userInvoices;
+    }
+    
     
     public static ArrayList<CarSoldData> getCarSoldByYear(long salesID, int year){
         ArrayList<CarSoldData> carSoldDataList = new ArrayList<>();
