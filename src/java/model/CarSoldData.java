@@ -13,6 +13,9 @@ public class CarSoldData {
     private int carSold;
     private Car car;
     private int yearSold;
+
+    public CarSoldData() {
+    }
     
     public CarSoldData(int carSold, Car car,int yearSold) {
         this.carSold = carSold;

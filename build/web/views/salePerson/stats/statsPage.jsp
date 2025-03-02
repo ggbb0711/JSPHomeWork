@@ -21,7 +21,11 @@
             <jsp:include page="./components/subHeader.jsp"></jsp:include>
         </div>   
         <div class="page-container">
-            <form method="GET" action="${pageContext.request.contextPath}/sales-person/stats">
+            <div>
+                <h1>BEST SELLING CAR MODEL</h1>
+                <jsp:include page="./components/carModelSoldTable.jsp"></jsp:include>
+            </div>
+            <form method="GET" action="${pageContext.request.contextPath}/sales-person/stats" style="display:flex; gap: 8px;">
                 <div>
                     <h1>CAR SOLD</h1>
                     <label for="carSoldByYear">By year:</label>

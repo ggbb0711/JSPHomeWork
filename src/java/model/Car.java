@@ -10,13 +10,13 @@ package model;
  * @author NGHIA
  */
 public class Car {
-    private int carID;
+    private long carID;
     private String serialNumber;
     private String model;
     private String colour;
     private int year;
 
-    public Car(int carID, String serialNumber, String model, String colour, int year) {
+    public Car(long carID, String serialNumber, String model, String colour, int year) {
         this.carID = carID;
         this.serialNumber = serialNumber;
         this.model = model;
@@ -27,7 +27,7 @@ public class Car {
     public Car() {
     }
 
-    public int getCarID() {
+    public long getCarID() {
         return carID;
     }
 

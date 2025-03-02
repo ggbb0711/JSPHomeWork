@@ -67,9 +67,11 @@ public class StatsServlet extends HttpServlet {
         
         ArrayList<CarSoldData> carSoldDataList = InvoiceDAO.getCarSoldByYear(30121050038l,carSoldByYear);
         ArrayList<CarRevenueData> carRevenueDataList = InvoiceDAO.getCarRevenueByYear(30121050038l,carRevenueByYear);
+        ArrayList<CarSoldData> carModelSoldDataList = InvoiceDAO.getMostSoldCarModel(30121050038l);
 
         request.setAttribute("carSoldDataList", carSoldDataList);
         request.setAttribute("carRevenueDataList", carRevenueDataList);
+        request.setAttribute("carModelSoldDataList", carModelSoldDataList);
         request.getRequestDispatcher(Pages.STATS_PAGE).forward(request,response);
     }
 

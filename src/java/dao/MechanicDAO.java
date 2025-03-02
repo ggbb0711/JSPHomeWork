@@ -23,10 +23,22 @@ import mylib.DBUtils;
 public class MechanicDAO {
     public static ArrayList<TopMechanicData> getTopMechanic(){
         ArrayList<TopMechanicData> topMechanicDataList = new ArrayList<>();
-        String query = "SELECT m.*, COUNT(sm.serviceTicketID) as ticketDone , AVG(sm.rate) as averageRate, SUM(sm.hours) as totalHours FROM Mechanic m" +
-                " JOIN ServiceMehanic sm ON sm.mechanicID = m.mechanicID" +
-                " GROUP BY m.mechanicID, m.mechanicName" +
-                " ORDER BY ticketDone DESC";
+        String query = "SELECT m.mechanicID, \n" +
+            "       m.mechanicName, \n" +
+            "       COUNT(sm.serviceTicketID) AS ticketDone, \n" +
+            "       AVG(sm.rate) AS averageRate, \n" +
+            "       SUM(sm.hours) AS totalHours\n" +
+            "FROM Mechanic m\n" +
+            "JOIN ServiceMehanic sm ON sm.mechanicID = m.mechanicID\n" +
+            "GROUP BY m.mechanicID, m.mechanicName\n" +
+            "HAVING COUNT(sm.serviceTicketID) IN (\n" +
+            "    SELECT DISTINCT TOP 3 COUNT(sm2.serviceTicketID)\n" +
+            "    FROM ServiceMehanic sm2\n" +
+            "    JOIN Mechanic m2 ON sm2.mechanicID = m2.mechanicID\n" +
+            "    GROUP BY m2.mechanicID\n" +
+            "    ORDER BY COUNT(sm2.serviceTicketID) DESC\n" +
+            ")\n" +
+            "ORDER BY ticketDone DESC";
 
         try (Connection conn = DBUtils.getConnection();
              PreparedStatement stmt = conn.prepareStatement(query)) {

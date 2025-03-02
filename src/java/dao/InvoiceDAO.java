@@ -64,6 +64,7 @@ public class InvoiceDAO {
         return result;
     }
     
+    
     public static ArrayList<SalesInvoice> getCarRevenueByUserID(long custID){
         ArrayList<SalesInvoice> userInvoices = new ArrayList<>();
         String query = "SELECT ca.*,invoiceDate, revenue FROM Customer c" +
@@ -78,7 +79,7 @@ public class InvoiceDAO {
                 ResultSet rs = stmt.executeQuery();
 
             while (rs.next()) {
-                int carID = rs.getInt("carID");
+                long carID = rs.getLong("carID");
                 String serialNumber = rs.getString("serialNumber");
                 String model = rs.getString("model");
                 String colour = rs.getString("colour");
@@ -120,7 +121,7 @@ public class InvoiceDAO {
             ResultSet rs = stmt.executeQuery();
 
             while (rs.next()) {
-                int carID = rs.getInt("carID");
+                long carID = rs.getLong("carID");
                 String serialNumber = rs.getString("serialNumber");
                 String model = rs.getString("model");
                 String colour = rs.getString("colour");
@@ -129,6 +130,55 @@ public class InvoiceDAO {
 
                 Car car = new Car(carID, serialNumber, model, colour, carYear);
                 carSoldDataList.add(new CarSoldData(carSold, car, year));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(InvoiceDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return carSoldDataList;
+    }
+    
+    public static ArrayList<CarSoldData> getMostSoldCarModel(long salesID){
+        ArrayList<CarSoldData> carSoldDataList = new ArrayList<>();
+        String query = "SELECT \n" +
+                    "    c.carID,\n" +
+                    "    c.serialNumber,\n" +
+                    "    c.model,\n" +
+                    "	c.colour,\n" +
+                    "    c.year,\n" +
+                    "	bestSellingModel.modelSold\n" +
+                    "FROM SalesInvoice si\n" +
+                    "JOIN Cars c ON si.carID = c.carID\n" +
+                    "JOIN (SELECT c2.model, COUNT(si2.invoiceID) as modelSold\n" +
+                    "     FROM SalesInvoice si2\n" +
+                    "     JOIN Cars c2 ON si2.carID = c2.carID\n" +
+                    "     WHERE si2.salesID = ?\n" +
+                    "     GROUP BY c2.model)  bestSellingModel ON bestSellingModel.model = c.model\n" +
+                    "WHERE si.salesID = ?\n" +
+                    "GROUP BY c.carID, c.serialNumber, c.model, c.colour, c.year, bestSellingModel.modelSold\n" +
+                    "ORDER BY COUNT(bestSellingModel.modelSold) DESC";
+
+        try (Connection conn = DBUtils.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(query)) {
+            stmt.setLong(1, salesID);
+            stmt.setLong(2, salesID);
+            ResultSet rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                long carID = rs.getLong("carID");
+                String serialNumber = rs.getString("serialNumber");
+                String model = rs.getString("model");
+                String colour = rs.getString("colour");
+                int carYear = rs.getInt("year");
+                int carSold = rs.getInt("modelSold");
+
+                Car car = new Car(carID, serialNumber, model, colour, carYear);
+                CarSoldData carSoldData = new CarSoldData();
+                carSoldData.setCarSold(carSold);
+                carSoldData.setCar(car);
+                carSoldDataList.add(carSoldData);
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -155,7 +205,7 @@ public class InvoiceDAO {
             ResultSet rs = stmt.executeQuery();
 
             while (rs.next()) {
-                int carID = rs.getInt("carID");
+                long carID = rs.getLong("carID");
                 String serialNumber = rs.getString("serialNumber");
                 String model = rs.getString("model");
                 String colour = rs.getString("colour");
