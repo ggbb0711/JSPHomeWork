@@ -22,7 +22,7 @@ import mylib.DBUtils;
  * @author NGHIA
  */
 public class PartUsedDAO {
-    public static ArrayList<PartUsed> getMostUsedParts(){
+    public  ArrayList<PartUsed> getMostUsedParts(){
         ArrayList<PartUsed> partUsedList = new ArrayList<>();
         String query = "SELECT p.*, SUM(pu.numberUsed) as numberUsed, SUM(pu.price) as totalPrice FROM Parts p" +
                     " JOIN PartsUsed pu ON p.partID = pu.partID" +

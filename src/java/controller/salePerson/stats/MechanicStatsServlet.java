@@ -50,7 +50,8 @@ public class MechanicStatsServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        ArrayList<TopMechanicData> topMechanicData = MechanicDAO.getTopMechanic();
+        MechanicDAO mechanicDAO = new MechanicDAO();
+        ArrayList<TopMechanicData> topMechanicData = mechanicDAO.getTopMechanic();
         request.setAttribute("topMechanicData", topMechanicData);
         request.getRequestDispatcher(Pages.STATS_TOP_3_MECHANIC_PAGE).forward(request,response);
     }

@@ -24,10 +24,8 @@ import mylib.DBUtils;
  * @author bluax
  */
 public class InvoiceDAO {
-    //ham nay dung de lay cac invoice cua 1 customer
-    //input: id khach hang
-    //output: ArrayList<SalesInvoice>
-    public static ArrayList<SalesInvoice> getAllInvoice(long custID,String salesID){
+
+    public  ArrayList<SalesInvoice> getAllInvoice(long custID,String salesID){
         ArrayList<SalesInvoice> result = new ArrayList<>();
         Connection cn=null;
         try{
@@ -65,7 +63,7 @@ public class InvoiceDAO {
     }
     
     
-    public static ArrayList<SalesInvoice> getCarRevenueByUserID(long custID){
+    public  ArrayList<SalesInvoice> getCarRevenueByUserID(long custID){
         ArrayList<SalesInvoice> userInvoices = new ArrayList<>();
         String query = "SELECT ca.*,invoiceDate, revenue FROM Customer c" +
             " JOIN SalesInvoice si ON c.custID=si.custID" +
@@ -105,7 +103,7 @@ public class InvoiceDAO {
     }
     
     
-    public static ArrayList<CarSoldData> getCarSoldByYear(long salesID, int year){
+    public  ArrayList<CarSoldData> getCarSoldByYear(long salesID, int year){
         ArrayList<CarSoldData> carSoldDataList = new ArrayList<>();
         String query = "SELECT c.carID, c.serialNumber, c.model, c.colour, c.year, COUNT(si.invoiceID) AS carSold " +
                        "FROM SalesInvoice si " +
@@ -140,7 +138,7 @@ public class InvoiceDAO {
         return carSoldDataList;
     }
     
-    public static ArrayList<CarSoldData> getMostSoldCarModel(long salesID){
+    public  ArrayList<CarSoldData> getMostSoldCarModel(long salesID){
         ArrayList<CarSoldData> carSoldDataList = new ArrayList<>();
         String query = "SELECT \n" +
                     "    c.carID,\n" +
@@ -189,7 +187,7 @@ public class InvoiceDAO {
         return carSoldDataList;
     }
     
-    public static ArrayList<CarRevenueData> getCarRevenueByYear(long salesID, int year){
+    public  ArrayList<CarRevenueData> getCarRevenueByYear(long salesID, int year){
         ArrayList<CarRevenueData> carRevenueDataList = new ArrayList<>();
         String query = "SELECT c.carID, c.serialNumber, c.model, c.colour, c.year, SUM(si.revenue) AS carSold " +
                        "FROM SalesInvoice si " +

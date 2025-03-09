@@ -15,7 +15,7 @@
 
 <div>
     <h1>Create new part</h1>
-    <form class="form-container" action="${pageContext.request.contextPath}/sales-person/CreatePartsServlet" method="POST">
+    <form class="form-container" action="${pageContext.request.contextPath}/sales-person/create" method="POST">
         <div class="form-input-container">
             <label for="partID">ID:</label>
             <input class="form-control" name="partID" id="partID" required="" type="number" value="<%= (formData != null && formData.get("partID") != null) ? formData.get("partID") : "" %>">

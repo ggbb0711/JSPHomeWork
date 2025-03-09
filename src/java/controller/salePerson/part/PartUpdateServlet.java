@@ -59,7 +59,8 @@ public class PartUpdateServlet extends HttpServlet {
         
         try {
             idValue = Integer.parseInt(partID);
-            Parts part=PartsDAO.getPartById(idValue);
+            PartsDAO partsDAO = new PartsDAO();
+            Parts part=partsDAO.getPartById(idValue);
             if(part==null) throw new Exception("Cannot find part");
             
             HashMap<String, String> updatingPart = new HashMap<>();
@@ -118,7 +119,8 @@ public class PartUpdateServlet extends HttpServlet {
             priceDTO.validateUpdate();
             // call DAO
             Parts part = new Parts(Integer.parseInt(partID),partName,Double.parseDouble(purchasePrice),Double.parseDouble(retailPrice));
-            Parts createdPart = PartsDAO.update(part);
+            PartsDAO partsDAO = new PartsDAO();
+            Parts createdPart = partsDAO.update(part);
             if (createdPart==null) {
                 throw new InvalidDataException("Cannot update product to database!");
             } else {

@@ -20,7 +20,7 @@ import mylib.DBUtils;
  * @author NGHIA
  */
 public class PartsDAO {
-    public static Parts getPartById(int id) throws ClassNotFoundException{
+    public  Parts getPartById(int id) throws ClassNotFoundException{
         String sqlQuery = "SELECT p.partID, p.partName, p.purchasePrice, p.retailPrice from Parts p WHERE p.partID = ?";
         Parts p = null;
         try{
@@ -50,7 +50,7 @@ public class PartsDAO {
         return p;
     }
     
-    public static ArrayList<Parts> getParts(String partName){
+    public  ArrayList<Parts> getParts(String partName){
         String sqlQuery = "SELECT p.partID, p.partName, p.purchasePrice, p.retailPrice from Parts p";
         if(!partName.isEmpty()) sqlQuery+=" WHERE p.partName LIKE ?";
         ArrayList<Parts> list = null;
@@ -88,11 +88,11 @@ public class PartsDAO {
         return list;
     }
     
-    public static ArrayList<Parts> getParts(){
+    public  ArrayList<Parts> getParts(){
         return getParts("");
     }
     
-    public static Parts create(Parts newParts){
+    public  Parts create(Parts newParts){
         boolean status = false;
         String sqlQuery = "INSERT INTO Parts(partID,partName,purchasePrice,retailPrice) "
                 + " VALUES(?, ?, ?, ?)";
@@ -117,7 +117,7 @@ public class PartsDAO {
         return (status)?newParts:null;
     }
     
-    public static Parts update(Parts updatePart){
+    public  Parts update(Parts updatePart){
         boolean status = false;
         String sqlQuery = "UPDATE Parts SET partName=?,purchasePrice=?,retailPrice=? WHERE partID=?";
         
@@ -142,7 +142,7 @@ public class PartsDAO {
         return (status)?updatePart:null;
     }
     
-    public static boolean delete(int id){
+    public  boolean delete(int id){
         boolean status = false;
         String deletePartsUsedSqlQuery = "DELETE FROM PartsUsed WHERE partID = ?";
         String deletePartsSqlQuery = "DELETE FROM Parts WHERE partID=?";

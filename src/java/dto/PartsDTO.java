@@ -6,7 +6,6 @@
 package dto;
 
 import dao.PartsDAO;
-import exceptions.ValidationError;
 import exceptions.ValidationException;
 import java.util.HashMap;
 import java.util.logging.Level;
@@ -65,11 +64,12 @@ public class PartsDTO{
 
         //validate id
         try {
+            PartsDAO partsDAO = new PartsDAO();
             int idValue = Integer.parseInt(partID);
             if (idValue <= 0) {
                 errors.put("partID", "Part ID must be greater than 0.");
             }
-            if(PartsDAO.getPartById(idValue)!=null) errors.put("partID", "Part ID has already existed");
+            if(partsDAO.getPartById(idValue)!=null) errors.put("partID", "Part ID has already existed");
         } catch (NumberFormatException e) {
             errors.put("partID", "Part ID must be an integer.");
         } catch (ClassNotFoundException ex) {

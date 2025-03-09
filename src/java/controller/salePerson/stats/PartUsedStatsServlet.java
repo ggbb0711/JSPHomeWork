@@ -50,7 +50,8 @@ public class PartUsedStatsServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        ArrayList<PartUsed> partUsedData = PartUsedDAO.getMostUsedParts();
+        PartUsedDAO partUsedDAO = new PartUsedDAO();
+        ArrayList<PartUsed> partUsedData = partUsedDAO.getMostUsedParts();
         request.setAttribute("partUsedData", partUsedData);
         request.getRequestDispatcher(Pages.STATS_PARTS_USED_PAGE).forward(request,response);
     }

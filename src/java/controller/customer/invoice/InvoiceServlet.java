@@ -51,7 +51,8 @@ public class InvoiceServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        ArrayList<SalesInvoice> customerInvoices = InvoiceDAO.getCarRevenueByUserID(11076);
+        InvoiceDAO invoiceDAO = new InvoiceDAO();
+        ArrayList<SalesInvoice> customerInvoices = invoiceDAO.getCarRevenueByUserID(11076);
         request.setAttribute("customerInvoices", customerInvoices);
         request.getRequestDispatcher(Pages.INVOICE_CUSTOMER_PAGE).forward(request, response);
     }

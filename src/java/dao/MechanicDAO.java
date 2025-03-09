@@ -21,7 +21,7 @@ import mylib.DBUtils;
  * @author NGHIA
  */
 public class MechanicDAO {
-    public static ArrayList<TopMechanicData> getTopMechanic(){
+    public  ArrayList<TopMechanicData> getTopMechanic(){
         ArrayList<TopMechanicData> topMechanicDataList = new ArrayList<>();
         String query = "SELECT m.mechanicID, \n" +
             "       m.mechanicName, \n" +

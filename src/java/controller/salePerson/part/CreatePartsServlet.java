@@ -85,11 +85,12 @@ public class CreatePartsServlet extends HttpServlet {
         PartsDTO priceDTO = new PartsDTO(partID,partName,purchasePrice,retailPrice);
         try {
             priceDTO.validate();
-            // call DAO
             Parts part = new Parts(Integer.parseInt(partID),partName,Double.parseDouble(purchasePrice),Double.parseDouble(retailPrice));
-            Parts existingPart = PartsDAO.getPartById(part.getPartID());
+            PartsDAO partsDAO = new PartsDAO();
+            
+            Parts existingPart = partsDAO.getPartById(part.getPartID());
             if(existingPart!=null) throw new InvalidDataException("The part with the id: "+part.getPartID()+" has already existed.");
-            Parts createdPart = PartsDAO.create(part);
+            Parts createdPart = partsDAO.create(part);
             if (createdPart==null) {
                 throw new InvalidDataException("Cannot save product to database!");
             } else {

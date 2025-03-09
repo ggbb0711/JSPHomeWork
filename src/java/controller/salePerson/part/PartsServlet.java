@@ -50,7 +50,8 @@ public class PartsServlet extends HttpServlet {
             throws ServletException, IOException {
         String partName = (request.getParameter("partName")!=null)?request.getParameter("partName"):"";
         
-        ArrayList<Parts> parts = PartsDAO.getParts(partName);
+        PartsDAO partsDAO = new PartsDAO();
+        ArrayList<Parts> parts = partsDAO.getParts(partName);
 
         request.setAttribute("partList",parts);
         request.getRequestDispatcher(Pages.PART_PAGE+"?partName="+((partName!=null)?partName:"")).forward(request,response);

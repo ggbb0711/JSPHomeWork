@@ -33,7 +33,7 @@
                             <a href="${pageContext.request.contextPath}/sales-person/part-update?partID=<%= list.get(i).getPartID()%>">
                                 <button class="btn btn-primary">Edit</button>
                             </a>
-                            <form action="${pageContext.request.contextPath}/sales-person/DeletePartServlet" method="POST">
+                            <form action="${pageContext.request.contextPath}/sales-person/delete" method="POST">
                                 <input type="hidden" value="delete" name="action">
                                 <input type="hidden" value="<%= list.get(i).getPartID()%>" name="partID">
                                 <input class="btn btn-danger" value="Delete" type="submit">
