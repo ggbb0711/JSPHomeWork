@@ -18,4 +18,5 @@ public class Routes {
     public static final String STATS_PARTS_USED = "/sales-person/stats-parts-used";
     public static final String STATS_TOP_MECHANIC = "/sales-person/top-mechanic";
     public static final String INVOICE_CUSTOMER = "/customer/invoice";
+    public static final String LOGIN = "/login/sales-person";
 }

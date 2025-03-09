@@ -10,9 +10,11 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/style/reset.css">
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/style/style.css">
     </head>
     <body>
-        <form action="loginServlet" accept-charset="utf-8">
+        <form action="login/sales-person" accept-charset="utf-8">
             <p><input type="text" name="txtname" required="" placeholder="enter name" ></p>
             <p><input type="submit" value ="login" ></p>
         </form>

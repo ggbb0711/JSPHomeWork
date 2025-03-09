@@ -19,7 +19,7 @@
     <body>
             <jsp:include page="/views/salePerson/components/header.jsp"></jsp:include>
 
-
+            
         <%
             SalePerson sp = (SalePerson) session.getAttribute("saleperson");
             if(sp == null){
@@ -51,8 +51,8 @@
         %>
         <table>
             <tr>
-                <th>CustID</th>
-                <th>CustName</th>
+                <th>Cust ID</th>
+                <th>Cust Name</th>
                 <th>Phone</th>
                 <th>Sex</th>
                 <th>Address</th>
