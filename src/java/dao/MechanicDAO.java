@@ -46,7 +46,7 @@ public class MechanicDAO {
 
             while (rs.next()) {
                 int ticketDone = rs.getInt("ticketDone");
-                long averageRate = rs.getLong("averageRate");
+                double averageRate = rs.getDouble("averageRate");
                 int totalHours = rs.getInt("totalHours");
                 
                 Mechanic mechanic = new Mechanic(rs.getLong("mechanicID"),rs.getString("mechanicName"));

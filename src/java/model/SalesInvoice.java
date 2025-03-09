@@ -12,31 +12,26 @@ import java.sql.Date;
  * @author bluax
  */
 public class SalesInvoice {
-    private int id;
+    private long id;
     private Date invoiceDate;
-    private String salesID;
+    private long salesID;
     private long carID;
     private long custID;
     private Car car;
-    private long revenue;
+    private double revenue;
     
-    public SalesInvoice() {
-        id = 0;
-        invoiceDate = null;
-        salesID = null;
-        carID = 0;
-        custID = 0;
-    }
 
-    public SalesInvoice(int id, Date invoiceDate, String salesID, long carID, long custID) {
+    public SalesInvoice(long id, Date invoiceDate, long salesID, long carID, long custID) {
         this.id = id;
         this.invoiceDate = invoiceDate;
         this.salesID = salesID;
         this.carID = carID;
         this.custID = custID;
     }
+    
+    public SalesInvoice(){}
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
@@ -52,11 +47,11 @@ public class SalesInvoice {
         this.invoiceDate = invoiceDate;
     }
 
-    public String getSalesID() {
+    public long getSalesID() {
         return salesID;
     }
 
-    public void setSalesID(String salesID) {
+    public void setSalesID(long salesID) {
         this.salesID = salesID;
     }
 
@@ -84,11 +79,11 @@ public class SalesInvoice {
         return car;
     }
 
-    public long getRevenue() {
+    public double getRevenue() {
         return revenue;
     }
 
-    public void setRevenue(long revenue) {
+    public void setRevenue(double revenue) {
         this.revenue = revenue;
     }
     

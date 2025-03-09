@@ -1,5 +1,4 @@
 <%@page import="java.util.HashMap"%>
-<%@page import="utils.constant.Routes"%>
 
 <%
     HashMap<String, String> formData = (HashMap<String, String>) request.getAttribute("formData");
@@ -27,7 +26,7 @@
     <%}
     %>
 
-    <form class="form-container" action="${pageContext.request.contextPath}${Routes.UPDATE_PARTS}?partId=<%=request.getParameter("partID")%>" method="POST">
+    <form class="form-container" action="${pageContext.request.contextPath}/sales-person/part-update?partId=<%=request.getParameter("partID")%>" method="POST">
         <input name="partID" id="partID" type="hidden" value="<%=request.getParameter("partID")%>">
         <div class="form-input-container">
             <label for="partName">Name:</label>

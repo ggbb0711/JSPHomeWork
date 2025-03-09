@@ -65,7 +65,7 @@ public class PartsDTO{
         //validate id
         try {
             PartsDAO partsDAO = new PartsDAO();
-            int idValue = Integer.parseInt(partID);
+            long idValue = Long.parseLong(partID);
             if (idValue <= 0) {
                 errors.put("partID", "Part ID must be greater than 0.");
             }

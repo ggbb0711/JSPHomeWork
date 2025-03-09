@@ -10,8 +10,8 @@ package model;
  * @author NGHIA
  */
 public class PartUsed {
-    private int serviceTicketID;
-    private int partID;
+    private long serviceTicketID;
+    private long partID;
     private int numberUsed;
 
     public PartUsed() {
@@ -19,18 +19,18 @@ public class PartUsed {
     private double price;
     private Parts part;
     
-    public PartUsed(int serviceTicketID, int partID, int numberUsed, double price) {
+    public PartUsed(long serviceTicketID, long partID, int numberUsed, double price) {
         this.serviceTicketID = serviceTicketID;
         this.partID = partID;
         this.numberUsed = numberUsed;
         this.price = price;
     }
 
-    public int getServiceTicketID() {
+    public long getServiceTicketID() {
         return serviceTicketID;
     }
 
-    public int getPartID() {
+    public long getPartID() {
         return partID;
     }
 
@@ -46,11 +46,11 @@ public class PartUsed {
         return part;
     }
 
-    public void setServiceTicketID(int serviceTicketID) {
+    public void setServiceTicketID(long serviceTicketID) {
         this.serviceTicketID = serviceTicketID;
     }
 
-    public void setPartID(int partID) {
+    public void setPartID(long partID) {
         this.partID = partID;
     }
 

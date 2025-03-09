@@ -10,17 +10,17 @@ package model;
  * @author NGHIA
  */
 public class CarRevenueData {
-    private int carRevenue;
+    private double carRevenue;
     private Car car;
     private int yearSold;
 
-    public CarRevenueData(int carRevenue, Car car, int yearSold) {
+    public CarRevenueData(double carRevenue, Car car, int yearSold) {
         this.carRevenue = carRevenue;
         this.car = car;
         this.yearSold = yearSold;
     }
 
-    public int getCarRevenue() {
+    public double getCarRevenue() {
         return carRevenue;
     }
 
@@ -32,7 +32,7 @@ public class CarRevenueData {
         return yearSold;
     }
 
-    public void setCarRevenue(int carRevenue) {
+    public void setCarRevenue(double carRevenue) {
         this.carRevenue = carRevenue;
     }
 

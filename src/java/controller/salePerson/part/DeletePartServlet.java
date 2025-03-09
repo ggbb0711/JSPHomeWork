@@ -68,7 +68,7 @@ public class DeletePartServlet extends HttpServlet {
         
         try{
             PartsDAO partsDAO = new PartsDAO();
-            boolean hasDeleted = partsDAO.delete(Integer.parseInt(partId));
+            boolean hasDeleted = partsDAO.delete(Long.parseLong(partId));
             response.sendRedirect(request.getHeader("Referer"));
         }
         catch(Exception ex){

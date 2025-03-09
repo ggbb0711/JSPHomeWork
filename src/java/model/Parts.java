@@ -10,12 +10,12 @@ package model;
  * @author NGHIA
  */
 public class Parts {
-    private int partID;
+    private long partID;
     private String partName; 
     private double purchasePrice;
     private double retailPrice;
 
-    public void setPartID(int partID) {
+    public void setPartID(long partID) {
         this.partID = partID;
     }
 
@@ -31,14 +31,14 @@ public class Parts {
         this.retailPrice = retailPrice;
     }
 
-    public Parts(int partID, String partName, double purchasePrice, double retailPrice) {
+    public Parts(long partID, String partName, double purchasePrice, double retailPrice) {
         this.partID = partID;
         this.partName = partName;
         this.purchasePrice = purchasePrice;
         this.retailPrice = retailPrice;
     }
 
-    public int getPartID() {
+    public long getPartID() {
         return partID;
     }
 

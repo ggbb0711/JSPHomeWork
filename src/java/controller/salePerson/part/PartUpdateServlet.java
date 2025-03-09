@@ -124,7 +124,7 @@ public class PartUpdateServlet extends HttpServlet {
             if (createdPart==null) {
                 throw new InvalidDataException("Cannot update product to database!");
             } else {
-                response.sendRedirect("parts");
+                response.sendRedirect(request.getContextPath()+Routes.PARTS);
             }
         }
         catch (ValidationException ex) {

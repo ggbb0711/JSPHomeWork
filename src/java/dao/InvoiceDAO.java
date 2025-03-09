@@ -25,7 +25,7 @@ import mylib.DBUtils;
  */
 public class InvoiceDAO {
 
-    public  ArrayList<SalesInvoice> getAllInvoice(long custID,String salesID){
+    public  ArrayList<SalesInvoice> getAllInvoice(long custID,long salesID){
         ArrayList<SalesInvoice> result = new ArrayList<>();
         Connection cn=null;
         try{
@@ -36,13 +36,13 @@ public class InvoiceDAO {
                              "where [custID] = ? and [salesID] = ?";
                 PreparedStatement pst = cn.prepareStatement(sql);
                 pst.setLong(1, custID);
-                pst.setString(2, salesID);
+                pst.setLong(2, salesID);
                 ResultSet table = pst.executeQuery();
                 if(table!=null){
                     while(table.next()){
                         int invoiceID = table.getInt("invoiceID");
                         Date createdDate = table.getDate("invoiceDate");
-                        String salesid = table.getString("salesID");
+                        long salesid = table.getLong("salesID");
                         int carID = table.getInt("carID");
                         //khong doc custid trong table vi la cung input dau vao
                         SalesInvoice si = new SalesInvoice(invoiceID, createdDate, salesid, carID, custID);
@@ -77,12 +77,12 @@ public class InvoiceDAO {
                 ResultSet rs = stmt.executeQuery();
 
             while (rs.next()) {
-                long carID = rs.getLong("carID");
+                Long carID = rs.getLong("carID");
                 String serialNumber = rs.getString("serialNumber");
                 String model = rs.getString("model");
                 String colour = rs.getString("colour");
                 int carYear = rs.getInt("year");
-                Long carRevenue = rs.getLong("revenue");
+                double carRevenue = rs.getDouble("revenue");
                 Date invoiceDate = rs.getDate("invoiceDate");
 
                 Car car = new Car(carID, serialNumber, model, colour, carYear);
@@ -119,7 +119,7 @@ public class InvoiceDAO {
             ResultSet rs = stmt.executeQuery();
 
             while (rs.next()) {
-                long carID = rs.getLong("carID");
+                Long carID = rs.getLong("carID");
                 String serialNumber = rs.getString("serialNumber");
                 String model = rs.getString("model");
                 String colour = rs.getString("colour");
@@ -165,7 +165,7 @@ public class InvoiceDAO {
             ResultSet rs = stmt.executeQuery();
 
             while (rs.next()) {
-                long carID = rs.getLong("carID");
+                Long carID = rs.getLong("carID");
                 String serialNumber = rs.getString("serialNumber");
                 String model = rs.getString("model");
                 String colour = rs.getString("colour");
@@ -189,12 +189,12 @@ public class InvoiceDAO {
     
     public  ArrayList<CarRevenueData> getCarRevenueByYear(long salesID, int year){
         ArrayList<CarRevenueData> carRevenueDataList = new ArrayList<>();
-        String query = "SELECT c.carID, c.serialNumber, c.model, c.colour, c.year, SUM(si.revenue) AS carSold " +
+        String query = "SELECT c.carID, c.serialNumber, c.model, c.colour, c.year, SUM(si.revenue) AS carRev " +
                        "FROM SalesInvoice si " +
                        "JOIN Cars c ON si.carID = c.carID " +
                        "WHERE si.salesID = ? AND YEAR(si.invoiceDate) = ? " +
                        "GROUP BY c.carID, c.serialNumber, c.model, c.colour, c.year " +
-                       "ORDER BY carSold DESC";
+                       "ORDER BY carRev DESC";
 
         try (Connection conn = DBUtils.getConnection();
              PreparedStatement stmt = conn.prepareStatement(query)) {
@@ -203,15 +203,15 @@ public class InvoiceDAO {
             ResultSet rs = stmt.executeQuery();
 
             while (rs.next()) {
-                long carID = rs.getLong("carID");
+                Long carID = rs.getLong("carID");
                 String serialNumber = rs.getString("serialNumber");
                 String model = rs.getString("model");
                 String colour = rs.getString("colour");
                 int carYear = rs.getInt("year");
-                int carSold = rs.getInt("carSold");
+                double carRev = rs.getDouble("carRev");
 
                 Car car = new Car(carID, serialNumber, model, colour, carYear);
-                carRevenueDataList.add(new CarRevenueData(carSold, car, year));
+                carRevenueDataList.add(new CarRevenueData(carRev, car, year));
             }
         } catch (SQLException e) {
             e.printStackTrace();

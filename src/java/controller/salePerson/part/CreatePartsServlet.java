@@ -94,7 +94,7 @@ public class CreatePartsServlet extends HttpServlet {
             if (createdPart==null) {
                 throw new InvalidDataException("Cannot save product to database!");
             } else {
-                response.sendRedirect(Routes.PARTS);
+                response.sendRedirect(request.getContextPath()+Routes.PARTS);
             }
         }
         catch (ValidationException ex) {

@@ -10,7 +10,7 @@ package model;
  * @author bluax
  */
 public class Customer {
-    private int custID;
+    private long custID;
     private String custName;
     private String Phone;
     private String sex;
@@ -24,7 +24,7 @@ public class Customer {
 //        custAddress = "";
     }
     
-    public Customer(int custID, String custName, String Phone, String sex, String custAddress) {
+    public Customer(long custID, String custName, String Phone, String sex, String custAddress) {
         this.custID = custID;
         this.custName = custName;
         this.Phone = Phone;
@@ -32,11 +32,11 @@ public class Customer {
         this.custAddress = custAddress;
     }
 
-    public int getCustID() {
+    public long getCustID() {
         return custID;
     }
 
-    public void setCustID(int custID) {
+    public void setCustID(long custID) {
         this.custID = custID;
     }
 

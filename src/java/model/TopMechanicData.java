@@ -11,14 +11,14 @@ package model;
  */
 public class TopMechanicData {
     private int ticketDone;
-    private long averageRate;
+    private double averageRate;
     private int totalHours;
     private Mechanic mechanic;
 
     public TopMechanicData() {
     }
 
-    public TopMechanicData(int ticketDone, long averageRate, int totalHours) {
+    public TopMechanicData(int ticketDone, double averageRate, int totalHours) {
         this.ticketDone = ticketDone;
         this.averageRate = averageRate;
         this.totalHours = totalHours;
@@ -28,7 +28,7 @@ public class TopMechanicData {
         return ticketDone;
     }
 
-    public long getAverageRate() {
+    public double getAverageRate() {
         return averageRate;
     }
 
@@ -44,7 +44,7 @@ public class TopMechanicData {
         this.ticketDone = ticketDone;
     }
 
-    public void setAverageRate(long averageRate) {
+    public void setAverageRate(double averageRate) {
         this.averageRate = averageRate;
     }
 

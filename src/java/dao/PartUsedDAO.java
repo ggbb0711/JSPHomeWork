@@ -37,7 +37,7 @@ public class PartUsedDAO {
                 int numberUsed = rs.getInt("numberUsed");
                 int totalPrice = rs.getInt("totalPrice");
                 
-                Parts part = new Parts(rs.getInt("partID"),rs.getString("partName"),rs.getInt("purchasePrice"),rs.getInt("retailPrice"));
+                Parts part = new Parts(rs.getLong("partID"),rs.getString("partName"),rs.getInt("purchasePrice"),rs.getInt("retailPrice"));
                 PartUsed partUsed = new PartUsed();
                 
                 partUsed.setNumberUsed(numberUsed);
