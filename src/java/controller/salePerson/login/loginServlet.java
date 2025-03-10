@@ -45,7 +45,7 @@ public class loginServlet extends HttpServlet {
                if(sp!=null){
                    HttpSession s = request.getSession(true);
                    s.setAttribute("saleperson", sp);
-                   response.sendRedirect( request.getContextPath()+ Routes.STATS);
+                   response.sendRedirect(request.getContextPath()+ Routes.STATS);
                }else{
                    request.setAttribute("error", "Login Failed");
                    request.getRequestDispatcher("/views/salePerson/login.jsp").forward(request, response);

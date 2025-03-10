@@ -19,4 +19,20 @@ public class Routes {
     public static final String STATS_TOP_MECHANIC = "/sales-person/top-mechanic";
     public static final String INVOICE_CUSTOMER = "/customer/invoice";
     public static final String LOGIN = "/login/sales-person";
+    
+    public static final String LOGOUT = "/logout/sales-person";
+    
+    public static final String CUSTOMER = "/sales-person/customers";
+    public static final String READ_CUSTOMER = "/sales-person/readCustomers";
+    public static final String UPDATE_CUSTOMER = "/sales-person/updateCustomers";
+    public static final String DELETE_CUSTOMER = "/sales-person/deleteCustomers";
+    
+    public static final String CAR = "/sales-person/cars";
+    public static final String READ_CAR = "/sales-person/readCars";
+    public static final String UPDATE_CAR = "/sales-person/updateCars";
+    public static final String DELETE_CAR = "/sales-person/deleteCars";
+    
+    public static final String SERVICETICKET = "/sales-person/serviceTicket";
+    public static final String READ_SERVICETICKET = "/sales-person/readServiceTicket";
+    
 }

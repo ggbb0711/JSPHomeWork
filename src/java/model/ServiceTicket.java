@@ -5,13 +5,14 @@
  */
 package model;
 
+import java.io.Serializable;
 import java.sql.Date;
 
 /**
  *
  * @author bluax
  */
-public class ServiceTicket {
+public class ServiceTicket implements Serializable {
     private String serviceTicketID;
     private Date dateReceived;
     private Date dateReturned;
