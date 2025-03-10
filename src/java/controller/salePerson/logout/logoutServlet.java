@@ -14,12 +14,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import utils.constant.Pages;
+import utils.constant.Routes;
 
 /**
  *
  * @author bluax
  */
-@WebServlet(name = "logoutServlet", urlPatterns = {"/logoutServlet"})
+@WebServlet(name = "logoutServlet", urlPatterns = { Routes.LOGOUT })
 public class logoutServlet extends HttpServlet {
 
     /**
@@ -38,7 +39,7 @@ public class logoutServlet extends HttpServlet {
             /* TODO output your page here. You may use following sample code. */
             HttpSession s = request.getSession();
             s.invalidate();
-            response.sendRedirect(Pages.LOG_OUT);
+            response.sendRedirect(request.getContextPath()); //tra ve trang ban dau 
         }
     }
 

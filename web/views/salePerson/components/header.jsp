@@ -15,6 +15,6 @@
         <c:set var="sp" scope="session" value="${sessionScope.saleperson}" />
         
     <div class="header-user-info">
-        <p>Hello ${sp.name}, <a class="header-nav" href="">LOGOUT</a></p>
+        <p>Hello ${sp.name}, <a class="header-nav" href="${pageContext.request.contextPath}/logout/sales-person">LOGOUT</a></p>
     </div>
 </header>

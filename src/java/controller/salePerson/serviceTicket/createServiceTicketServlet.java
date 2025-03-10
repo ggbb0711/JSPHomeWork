@@ -5,15 +5,20 @@
  */
 package controller.salePerson.serviceTicket;
 
+import dao.CarDAO;
+import dao.CustomerDAO;
 import dao.ServiceTicketDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import model.Car;
+import model.Customer;
 import utils.constant.Pages;
 import utils.constant.Routes;
 
@@ -43,7 +48,7 @@ public class createServiceTicketServlet extends HttpServlet {
             String dateReturn = request.getParameter("txtdatereturn");
             String custid = request.getParameter("txtcustid");
             String carid = request.getParameter("txtcarid");
-            
+
             java.sql.Date sqlDateReceive = null;
             java.sql.Date sqlDateReturn = null;
             try {
@@ -66,11 +71,19 @@ public class createServiceTicketServlet extends HttpServlet {
             ServiceTicketDAO d = new ServiceTicketDAO();
             int result = d.createServiceTicket(id, sqlDateReceive, sqlDateReturn, custid, carid);
             
+            CarDAO d1 = new CarDAO();
+            ArrayList<Car> list = d1.findAllCar("", "", "");
+            
+            CustomerDAO d2 = new CustomerDAO();
+            ArrayList<Customer> list1 = d2.getAllCustomer("");
+             
             if(result>0){
                 request.setAttribute("createTicket", "Created");
             }else{
                 request.setAttribute("createTicket", "Fail to create");
             }
+            request.setAttribute("customerlist", list1);
+            request.setAttribute("carlist", list);
             request.getRequestDispatcher(Pages.CREATE_SERVICE_TICKET_PAGE).forward(request, response);
         }
     }

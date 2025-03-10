@@ -10,7 +10,8 @@ package utils.constant;
  * @author NGHIA
  */
 public class Pages {
-    public static String LOG_OUT = "/views/salePerson/login.jsp";
+    public static String LOG_IN = "/views/salePerson/login.jsp";
+    
     public static String PART_PAGE = "/views/salePerson/parts/partPage.jsp";
     public static String UPDATE_PART_PAGE = "/views/salePerson/parts/updatePartPage.jsp";
     public static String CREATE_PART_PAGE = "/views/salePerson/parts/newPartsPage.jsp";

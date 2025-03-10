@@ -30,7 +30,7 @@
             <p><input type="date" name="txtdatereturn" /></p>
             <p>Select Customer</p>
             <select name="txtcustid">
-                <c:set var="custlist" scope="request" value="${requestScope.customerList}" />
+                <c:set var="custlist" scope="request" value="${requestScope.customerlist}" />
                 <c:if test="${not empty custlist}" >
                     <c:forEach var="cus" items="${custlist}" >
                         <option value="${cus.custID}"> ${cus.custID} - ${cus.custName} </option>

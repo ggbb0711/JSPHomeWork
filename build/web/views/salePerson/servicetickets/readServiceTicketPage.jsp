@@ -47,8 +47,8 @@
                     <td>${ticket.serviceTicketID}</td>
                     <td>${ticket.dateReceived}</td>
                     <td>${ticket.dateReturned}</td>
-                    <td>${ticket.custId}</td>
-                    <td>${ticket.carId}</td>
+                    <td>${ticket.custID}</td>
+                    <td>${ticket.carID}</td>
                 </tr>
             </c:forEach>
         </table>
