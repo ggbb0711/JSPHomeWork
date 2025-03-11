@@ -144,7 +144,7 @@ table th {
   background-color: var(--main-green);
   color: white;
 }
-/*TABLE SECTION HERE*/
+/*TABLE SECTION END*/
 
 .btn{
     color: white;
@@ -165,3 +165,18 @@ table th {
 .part-search-input{
     width: auto;
 }
+
+/*SHOPPING CART START*/
+.shopping-cart-container{
+    position:relative;
+}
+
+.shopping-cart-notification{
+    position:absolute;
+    padding: 2px;
+    font-size: 10px;
+    background: red;
+    top: 0px;
+    left:0px;
+}
+/*SHOPPING CART END*/

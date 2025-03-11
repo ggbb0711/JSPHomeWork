@@ -18,4 +18,6 @@ public class Pages {
     public static String STATS_PARTS_USED_PAGE = "/views/salePerson/stats/partsUsedStatsPage.jsp";
     public static String STATS_TOP_3_MECHANIC_PAGE = "/views/salePerson/stats/topMechanicPage.jsp";
     public static String INVOICE_CUSTOMER_PAGE = "/views/customer/invoice/invoicePage.jsp";
+    public static String AVAILABLE_CAR_PAGE = "/view/customer/availableCarPage.jsp";
+    public static String WISHLIST_CUSTOMER_PAGE = "/view/customer/wishListPage.jsp";
 }

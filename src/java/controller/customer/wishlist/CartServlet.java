@@ -5,7 +5,6 @@
  */
 package controller.customer.wishlist;
 
-import dao.CarDAO;
 import java.io.IOException;
 import java.util.ArrayList;
 import javax.servlet.ServletException;
@@ -22,8 +21,8 @@ import utils.constant.Routes;
  *
  * @author NGHIA
  */
-@WebServlet(name = "availableCarsServlet", urlPatterns = {Routes.AVAILABLE_CAR_CUSTOMER})
-public class AvailableCarsServlet extends HttpServlet {
+@WebServlet(name = "ViewCartServlet", urlPatterns = {Routes.CUSTOMER_CART_SERVLET})
+public class CartServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -51,14 +50,7 @@ public class AvailableCarsServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        CarDAO carDAO = new CarDAO();
-        ArrayList<Car> currentCart = new ArrayList<>();
-        HttpSession session = request.getSession();
-        if(session!=null) currentCart = (ArrayList<Car>) session.getAttribute("cartItems");
-        
-        ArrayList<Car> carList = carDAO.findCarNotInCarID(currentCart.stream().map(c->c.getCarID()));
-        request.setAttribute("availableCar",carList);
-        request.getRequestDispatcher(Pages.AVAILABLE_CAR_PAGE).forward(request, response);
+        request.getRequestDispatcher(Pages.WISHLIST_CUSTOMER_PAGE);
     }
 
     /**
@@ -72,7 +64,13 @@ public class AvailableCarsServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        ArrayList<Car> cart = new ArrayList<>();
+        HttpSession session = request.getSession();
+        if(session!=null) cart = (ArrayList<Car>) session.getAttribute("cartItems");
+        
+        if(cart.size()>0){
+            
+        }
     }
 
     /**

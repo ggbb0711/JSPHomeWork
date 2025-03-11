@@ -12,6 +12,7 @@
         <title>Your invoices</title>
         <link rel="stylesheet" href="${pageContext.request.contextPath}/style/reset.css">
         <link rel="stylesheet" href="${pageContext.request.contextPath}/style/style.css">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=shopping_cart" />
     </head>
     <body>
         <div class="sticky-header">

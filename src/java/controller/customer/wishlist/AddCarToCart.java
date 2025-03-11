@@ -5,9 +5,7 @@
  */
 package controller.customer.wishlist;
 
-import dao.CarDAO;
 import java.io.IOException;
-import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -15,15 +13,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import model.Car;
-import utils.constant.Pages;
 import utils.constant.Routes;
 
 /**
  *
  * @author NGHIA
  */
-@WebServlet(name = "availableCarsServlet", urlPatterns = {Routes.AVAILABLE_CAR_CUSTOMER})
-public class AvailableCarsServlet extends HttpServlet {
+@WebServlet(name = "AddCarToCart", urlPatterns = {Routes.ADD_TO_CART})
+public class AddCarToCart extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -51,14 +48,7 @@ public class AvailableCarsServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        CarDAO carDAO = new CarDAO();
-        ArrayList<Car> currentCart = new ArrayList<>();
-        HttpSession session = request.getSession();
-        if(session!=null) currentCart = (ArrayList<Car>) session.getAttribute("cartItems");
-        
-        ArrayList<Car> carList = carDAO.findCarNotInCarID(currentCart.stream().map(c->c.getCarID()));
-        request.setAttribute("availableCar",carList);
-        request.getRequestDispatcher(Pages.AVAILABLE_CAR_PAGE).forward(request, response);
+        processRequest(request, response);
     }
 
     /**
@@ -72,7 +62,15 @@ public class AvailableCarsServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        long carID = Long.parseLong(request.getParameter("carID"));
+        String serialNumber = request.getParameter("serialNumber");
+        String model = request.getParameter("model");
+        String colour = request.getParameter("colour");
+        int year = Integer.getInteger(request.getParameter("year"));
+        
+        HttpSession session = request.getSession(true);
+        session.setAttribute("cart", new Car(carID,serialNumber,model,colour,year));
+        response.sendRedirect(request.getHeader("Referer"));
     }
 
     /**
