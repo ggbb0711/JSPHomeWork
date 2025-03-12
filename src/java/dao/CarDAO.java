@@ -22,15 +22,19 @@ import mylib.DBUtils;
 public class CarDAO {
     public ArrayList<Car> findCarNotInCarID(ArrayList<Long> carIdList){
         ArrayList<Car> carFound = new ArrayList<>();
+        String sql ="SELECT * FROM Cars";
         
-        String sql = "SELECT * FROM Cars WHERE carID NOT IN (";
-        for (int i = 0; i < carIdList.size(); i++) {
-            sql+="?";
-            if (i < carIdList.size() - 1) {
-                sql+=",";
+        if(carIdList.size()>0){
+            sql = "SELECT * FROM Cars WHERE carID NOT IN (";
+            for (int i = 0; i < carIdList.size(); i++) {
+                sql+="?";
+                if (i < carIdList.size() - 1) {
+                    sql+=",";
+                }
             }
+            sql+=")";        
         }
-        sql+=")";
+
         
         Connection conn;
         try {
@@ -44,7 +48,7 @@ public class CarDAO {
             ResultSet rs = ps.executeQuery();
             
             while(rs.next()){
-                Car car = new Car(rs.getLong("carID"),rs.getString("serialNumber"),rs.getString("model"),rs.getString("color"),rs.getInt("year"));
+                Car car = new Car(rs.getLong("carID"),rs.getString("serialNumber"),rs.getString("model"),rs.getString("colour"),rs.getInt("year"));
                 carFound.add(car);
             }
         } catch (SQLException e) {

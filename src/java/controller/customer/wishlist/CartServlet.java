@@ -5,6 +5,7 @@
  */
 package controller.customer.wishlist;
 
+import dao.WishlistDAO;
 import java.io.IOException;
 import java.util.ArrayList;
 import javax.servlet.ServletException;
@@ -50,7 +51,7 @@ public class CartServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        request.getRequestDispatcher(Pages.WISHLIST_CUSTOMER_PAGE);
+        request.getRequestDispatcher(Pages.WISHLIST_CUSTOMER_PAGE).forward(request, response);
     }
 
     /**
@@ -66,11 +67,14 @@ public class CartServlet extends HttpServlet {
             throws ServletException, IOException {
         ArrayList<Car> cart = new ArrayList<>();
         HttpSession session = request.getSession();
-        if(session!=null) cart = (ArrayList<Car>) session.getAttribute("cartItems");
+        if(session.getAttribute("cartItems")!=null) cart = (ArrayList<Car>) session.getAttribute("cartItems");
         
         if(cart.size()>0){
-            
+            WishlistDAO wishlistDAO = new WishlistDAO();
+            if(!wishlistDAO.createWishlist(11076, cart)) request.setAttribute("wishlistMsg", "Failed to add to wishlist");
+            else session.setAttribute("cartItems",new ArrayList<>());
         }
+        request.getRequestDispatcher(Pages.WISHLIST_CUSTOMER_PAGE).forward(request, response);
     }
 
     /**

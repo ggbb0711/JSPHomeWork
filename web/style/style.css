@@ -26,6 +26,12 @@ a{
     padding: 8px;
 }
 
+.header-user-info{
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
 .sub-header{
     display:flex;
     background: var(--main-black);
@@ -172,11 +178,16 @@ table th {
 }
 
 .shopping-cart-notification{
-    position:absolute;
-    padding: 2px;
-    font-size: 10px;
-    background: red;
+    display:block;
+    position: absolute;
+    padding: 1px 3px;
+    font-size: 9px;
     top: 0px;
-    left:0px;
+    left: 0px;
+    border-radius: 100%;
+    color: white;
+    cursor: pointer;
+    background: var(--danger);
+
 }
 /*SHOPPING CART END*/

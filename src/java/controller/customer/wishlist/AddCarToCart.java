@@ -6,6 +6,7 @@
 package controller.customer.wishlist;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -66,10 +67,17 @@ public class AddCarToCart extends HttpServlet {
         String serialNumber = request.getParameter("serialNumber");
         String model = request.getParameter("model");
         String colour = request.getParameter("colour");
-        int year = Integer.getInteger(request.getParameter("year"));
+        int year = Integer.parseInt(request.getParameter("year"));
         
-        HttpSession session = request.getSession(true);
-        session.setAttribute("cart", new Car(carID,serialNumber,model,colour,year));
+        //Get current cart from session
+        HttpSession session = request.getSession();
+        ArrayList<Car> currentCart = new ArrayList<>();
+        if(session.getAttribute("cartItems")!=null) currentCart = (ArrayList<Car>) session.getAttribute("cartItems");
+        //Add new car to cart
+        currentCart.add(new Car(carID,serialNumber,model,colour,year));
+        //Set the cart to the session attribute
+        session.setAttribute("cartItems", currentCart);
+        
         response.sendRedirect(request.getHeader("Referer"));
     }
 

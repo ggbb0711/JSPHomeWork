@@ -22,17 +22,39 @@
             <h1>CURRENT CART</h1>
             <c:choose>
                 <c:when test="${not empty sessionScope.cartItems}">
-                    <jsp:include page="./components/currentCartTable.jsp"></jsp:include>
+                    <div class="scrollable-table">
+                        <table>
+                            <tr>
+                                <th>CarID</th>
+                                <th>Serial number</th>
+                                <th>Model</th>
+                                <th>Colour</th>
+                                <th>Year</th>
+                            </tr>
+
+                            <c:forEach var="data" items="${sessionScope.cartItems}">
+                                <tr>
+                                    <td>${data.getCarID()}</td>
+                                    <td>${data.getSerialNumber()}</td>
+                                    <td>${data.getModel()}</td>
+                                    <td>${data.getColour()}</td>
+                                    <td>${data.getYear()}</td>
+                                </tr>
+                            </c:forEach>
+
+                        </table>
+                    </div>
                 </c:when>
                 <c:otherwise>
                     <p>There is no car in your cart right now</p>
                 </c:otherwise>
             </c:choose>
             <c:if test="${not empty sessionScope.cartItems}">
-                <form action="${pageContext.request.contextPath}/customer/cart">
+                <form action="${pageContext.request.contextPath}/customer/cart" method="POST" style="margin-top: 4px">
                     <input class="form-submit-btn" type="submit" value="Create new cart">
                 </form>
             </c:if>
+            <span class="form-error-input">${requestScope.wishlistMsg}</span>
         </div>
         
     </body>
