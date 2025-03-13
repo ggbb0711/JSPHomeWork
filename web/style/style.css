@@ -175,10 +175,10 @@ table th {
 /*SHOPPING CART START*/
 .shopping-cart-container{
     position:relative;
+    display:block;
 }
 
 .shopping-cart-notification{
-    display:block;
     position: absolute;
     padding: 1px 3px;
     font-size: 9px;

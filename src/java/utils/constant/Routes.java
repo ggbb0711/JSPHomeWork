@@ -21,4 +21,6 @@ public class Routes {
     public static final String AVAILABLE_CAR_CUSTOMER = "/customer";
     public static final String ADD_TO_CART = "/customer/add-to-cart";
     public static final String CUSTOMER_CART_SERVLET = "/customer/cart";
+    public static final String WISHLIST_SALE_PERSON = "/sales-person/wishlist";
+    public static final String WISHLIST_DETAIL_SALE_PERSON = "/sales-person/wishlistDetail";
 }

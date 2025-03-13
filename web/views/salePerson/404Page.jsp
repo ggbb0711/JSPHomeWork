@@ -10,8 +10,8 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>404 Error</title>
-        <link rel="stylesheet" href="style/reset.css">
-        <link rel="stylesheet" href="style/style.css">
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/style/reset.css">
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/style/style.css">
     </head>
     <body>
         <jsp:include page="/views/salePerson/components/header.jsp"></jsp:include>

@@ -80,7 +80,7 @@ public class PartUpdateServlet extends HttpServlet {
         } catch (Exception e) {
             System.out.println(e);
             request.setAttribute("message", "The partId cannot be found");
-            request.getRequestDispatcher(Pages.MISSING_404_ERROR_PAGE).forward(request,response);
+            request.getRequestDispatcher(Pages.MISSING_404_ERROR_SALE_PARSON_PAGE).forward(request,response);
         }
         
     }

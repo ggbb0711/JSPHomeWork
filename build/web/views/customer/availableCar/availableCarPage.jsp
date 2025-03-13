@@ -17,7 +17,7 @@
         </div>  
         <div class="page-container">
             <h1>AVAILABLE CAR</h1>
-            <div class="scrollable-table">
+            <div>
                 <table>
                     <tr>
                         <th>CarID</th>

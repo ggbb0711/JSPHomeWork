@@ -46,6 +46,26 @@ public class Car {
     public int getYear() {
         return year;
     }
+
+    public void setCarID(long carID) {
+        this.carID = carID;
+    }
+
+    public void setSerialNumber(String serialNumber) {
+        this.serialNumber = serialNumber;
+    }
+
+    public void setModel(String model) {
+        this.model = model;
+    }
+
+    public void setColour(String colour) {
+        this.colour = colour;
+    }
+
+    public void setYear(int year) {
+        this.year = year;
+    }
     
     
 }

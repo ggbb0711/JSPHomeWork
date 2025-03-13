@@ -22,7 +22,7 @@
             <h1>CURRENT CART</h1>
             <c:choose>
                 <c:when test="${not empty sessionScope.cartItems}">
-                    <div class="scrollable-table">
+                    <div>
                         <table>
                             <tr>
                                 <th>CarID</th>

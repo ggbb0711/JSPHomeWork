@@ -11,6 +11,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import model.Car;
@@ -24,6 +25,50 @@ import mylib.DBUtils;
  * @author bluax
  */
 public class InvoiceDAO {
+    
+    public boolean createInvoice(ArrayList<SalesInvoice> invoices, int wishlistID){
+        boolean result = true;
+        Connection cn = null;
+        
+        try {
+            cn = DBUtils.getConnection();
+            if(cn!=null){
+                cn.setAutoCommit(false);
+                String insertInvoiceSql = "INSERT INTO SalesInvoice(invoiceID,invoiceDate,salesID,carID,custID,revenue) "
+                        + " VALUES(?,?,?,?,?,?)";
+                String checkWishlistSql = "UPDATE Wishlist SET isCompleted=1 WHERE id = ?";
+                
+                PreparedStatement psInsert = cn.prepareStatement(insertInvoiceSql);
+                for(SalesInvoice invoice:invoices){
+                    psInsert.setLong(1, invoice.getId());
+                    psInsert.setDate(2, invoice.getInvoiceDate());
+                    psInsert.setLong(3, invoice.getSalesID());
+                    psInsert.setLong(4, invoice.getCarID());
+                    psInsert.setLong(5, invoice.getCustID());
+                    psInsert.setDouble(6, invoice.getRevenue());
+                    psInsert.addBatch();
+                }
+                PreparedStatement psCheckWishlist = cn.prepareStatement(checkWishlistSql);
+                psCheckWishlist.setInt(1, wishlistID);
+                
+                int[] rowsInserted = psInsert.executeBatch();
+                int hasCheckedWishlist = psCheckWishlist.executeUpdate();
+                for(int row:rowsInserted){
+                    if(row<1) result = false;
+                }
+                if(hasCheckedWishlist<1) result = false;
+                
+                cn.commit();
+            }
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(InvoiceDAO.class.getName()).log(Level.SEVERE, null, ex);
+            result =false;
+        } catch (SQLException ex) {
+            Logger.getLogger(InvoiceDAO.class.getName()).log(Level.SEVERE, null, ex);
+            result = false;
+        }
+        return result;
+    }
 
     public  ArrayList<SalesInvoice> getAllInvoice(long custID,long salesID){
         ArrayList<SalesInvoice> result = new ArrayList<>();
@@ -140,39 +185,24 @@ public class InvoiceDAO {
     
     public  ArrayList<CarSoldData> getMostSoldCarModel(long salesID){
         ArrayList<CarSoldData> carSoldDataList = new ArrayList<>();
-        String query = "SELECT \n" +
-                    "    c.carID,\n" +
-                    "    c.serialNumber,\n" +
-                    "    c.model,\n" +
-                    "	c.colour,\n" +
-                    "    c.year,\n" +
-                    "	bestSellingModel.modelSold\n" +
-                    "FROM SalesInvoice si\n" +
-                    "JOIN Cars c ON si.carID = c.carID\n" +
-                    "JOIN (SELECT c2.model, COUNT(si2.invoiceID) as modelSold\n" +
-                    "     FROM SalesInvoice si2\n" +
-                    "     JOIN Cars c2 ON si2.carID = c2.carID\n" +
-                    "     WHERE si2.salesID = ?\n" +
-                    "     GROUP BY c2.model)  bestSellingModel ON bestSellingModel.model = c.model\n" +
-                    "WHERE si.salesID = ?\n" +
-                    "GROUP BY c.carID, c.serialNumber, c.model, c.colour, c.year, bestSellingModel.modelSold\n" +
-                    "ORDER BY COUNT(bestSellingModel.modelSold) DESC";
+        String query = "    SELECT c2.model, COUNT(si2.invoiceID) AS modelSold\n" +
+                "    FROM SalesInvoice si2\n" +
+                "    JOIN Cars c2 ON si2.carID = c2.carID\n" +
+                "    WHERE si2.salesID = ?\n" +
+                "    GROUP BY c2.model\n" +
+                "	ORDER BY COUNT(si2.invoiceID) DESC";
 
         try (Connection conn = DBUtils.getConnection();
              PreparedStatement stmt = conn.prepareStatement(query)) {
             stmt.setLong(1, salesID);
-            stmt.setLong(2, salesID);
             ResultSet rs = stmt.executeQuery();
 
             while (rs.next()) {
-                Long carID = rs.getLong("carID");
-                String serialNumber = rs.getString("serialNumber");
                 String model = rs.getString("model");
-                String colour = rs.getString("colour");
-                int carYear = rs.getInt("year");
                 int carSold = rs.getInt("modelSold");
 
-                Car car = new Car(carID, serialNumber, model, colour, carYear);
+                Car car = new Car();
+                car.setModel(model);
                 CarSoldData carSoldData = new CarSoldData();
                 carSoldData.setCarSold(carSold);
                 carSoldData.setCar(car);
