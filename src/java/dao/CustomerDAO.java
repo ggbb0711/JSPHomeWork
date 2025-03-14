@@ -15,8 +15,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import model.Car;
 import model.Customer;
+import model.PartUsed;
 import model.Parts;
+import model.SaleInvoice;
+import model.SalesInvoice;
+import model.SalesPerson;
 import model.ServiceTicket;
 import mylib.DBUtils;
 
@@ -30,7 +35,7 @@ public class CustomerDAO extends DBUtils {
     private ResultSet rs;
     private List<ServiceTicket> tickets;
     private List<PartsUsed> partUsedList;
-    private List<SaleInvoice> invoices;
+    private List<SalesInvoice> invoices;
 
     public CustomerDAO() {
         tickets = new ArrayList<>();
@@ -43,7 +48,7 @@ public class CustomerDAO extends DBUtils {
             CustomerDAO cusDAO = new CustomerDAO();
             
             
-            Customer customer = new Customer(11099, "tungupdaye", 12345, "M", "hanoi");
+            Customer customer = new Customer(11099, "tungupdaye", "12345", "M", "hanoi");
          if( cusDAO.updateCustomer(customer)){
              System.out.println("thanh cong");
          }else{
@@ -71,11 +76,11 @@ public class CustomerDAO extends DBUtils {
             if (rs.next()) {
                 int cusId = rs.getInt("custID");
                 String cusName = rs.getString("custName");
-                int cusPhone = rs.getInt("phone");
+                String Phone = rs.getString("cusPhone");
                 String sex = rs.getString("sex");
                 String address = rs.getString("cusAddress");
 
-                Customer customer = new Customer(cusId, cusName, cusPhone, sex, address);
+                Customer customer = new Customer(cusId, cusName, Phone, sex, address);
 
                 return customer;
 
@@ -104,7 +109,7 @@ public class CustomerDAO extends DBUtils {
             rs = ps.executeQuery();
 
             while (rs.next()) {
-                int serviceTickerId = rs.getInt("serviceTicketID");
+                String serviceTicketID = rs.getString("serviceTicketID");
                 Date dateReceived = rs.getDate("dateReceived");
                 Date dateReturned = rs.getDate("dateReturned");
                 int custID = rs.getInt("custID");
@@ -120,11 +125,11 @@ public class CustomerDAO extends DBUtils {
                 String colour = rs.getString("colour");
                 int year = rs.getInt("year");
 
-                Customer customer = new Customer(custID, cusName, cusPhone, sex, address);
+                Customer customer = new Customer(custID, cusName, serialNumber, sex, address);
 
-                Cars car = new Cars(carId, serialNumber, model, colour, year);
+                Car car = new Car(carId, serialNumber, model, colour, year);
 
-                ServiceTicket ticket = new ServiceTicket(serviceTickerId, dateReceived,
+                ServiceTicket ticket = new ServiceTicket(serviceTickerID, dateReceived,
                         dateReturned, customer, car);
 
                 tickets.add(ticket);
@@ -150,7 +155,7 @@ public class CustomerDAO extends DBUtils {
             rs = ps.executeQuery();
 
             while (rs.next()) {
-                int serviceTickerId = rs.getInt("serviceTicketID");
+                String serviceTicketID = rs.getString("serviceTicketID");
                 int partID = rs.getInt("partID");
                 int numberUsed = rs.getInt("numberUsed");
                 double price = rs.getDouble("price");
@@ -159,12 +164,12 @@ public class CustomerDAO extends DBUtils {
                 double purchasePrice = rs.getDouble("purchasePrice");
                 double retailPrice = rs.getDouble("retailPrice");
 
-                ServiceTicket ticket = new ServiceTicket(serviceTickerId, null,
-                        null, null, null);
+                ServiceTicket ticket = new ServiceTicket(serviceTicketID, null,null, null, null);
+                        
 
                 Parts part = new Parts(partID, partName, purchasePrice, retailPrice);
 
-                PartsUsed partUsed = new PartsUsed(ticket, part, numberUsed, price);
+                PartUsed partUsed = new PartUsed(ticket, part, numberUsed, price);
 
                 partUsedList.add(partUsed);
 
@@ -177,7 +182,7 @@ public class CustomerDAO extends DBUtils {
         return partUsedList;
     }
 
-    public List<SaleInvoice> getAllInvoiceByUserId(int id) throws ClassNotFoundException {
+    public List<SalesInvoice> getAllInvoiceByUserId(int id) throws ClassNotFoundException {
         String sql = "select * from SalesInvoice s\n"
                 + "join Customer c\n"
                 + "on s.custID = c.custID\n"
@@ -201,7 +206,7 @@ public class CustomerDAO extends DBUtils {
                 int custID = rs.getInt("custID");
 
                 String cusName = rs.getString("custName");
-                int cusPhone = rs.getInt("phone");
+                String cusPhone = rs.getString("cusPhone");
                 String sex = rs.getString("sex");
                 String address = rs.getString("cusAddress");
 
@@ -217,7 +222,7 @@ public class CustomerDAO extends DBUtils {
 
                 Customer customer = new Customer(custID, cusName, cusPhone, sex, address);
 
-                Cars car = new Cars(carID, serialNumber, model, colour, year);
+                Car car = new Car(carID, serialNumber, model, colour, year);
 
                 SalesPerson saler = new SalesPerson(salesID, salesName, birthday, sexSale, salesAddress);
 
@@ -248,11 +253,11 @@ public class CustomerDAO extends DBUtils {
             if (rs.next()) {
                 int cusId = rs.getInt("custID");
                 String cusName = rs.getString("custName");
-                int cusPhone = rs.getInt("phone");
+                String Phone = rs.getString("cusPhone");
                 String sex = rs.getString("sex");
                 String address = rs.getString("cusAddress");
 
-                Customer customer = new Customer(cusId, cusName, cusPhone, sex, address);
+                Customer customer = new Customer(cusId, cusName, Phone, sex, address);
 
                 return customer;
             }
@@ -277,9 +282,9 @@ public class CustomerDAO extends DBUtils {
 
             ps.setInt(1, customer.getCustID());
             ps.setString(2, customer.getCustName());
-            ps.setInt(3, customer.getPhone());
+            ps.setString(3, customer.getPhone());
             ps.setString(4, customer.getSex());
-            ps.setString(5, customer.getCusAddress());
+            ps.setString(5, customer.getCustAddress());
             ps.setInt(6, customer.getCustID());
 
             int rowsAffected = ps.executeUpdate();

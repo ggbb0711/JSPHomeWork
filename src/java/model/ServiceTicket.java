@@ -15,18 +15,18 @@ public class ServiceTicket {
     private String serviceTicketID;
     private Date dateReceived;
     private Date dateReturned;
-    private int custID;
+    private String custID;
     private String carID;
 
     public ServiceTicket() {
         serviceTicketID = null;
         dateReceived = null;
         dateReturned = null;
-        custID = 0;
+        custID = null;
         carID = null;
     }
 
-    public ServiceTicket(String serviceTicketID, Date dateReceived, Date dateReturned, int custID, String carID) {
+    public ServiceTicket(String serviceTicketID, Date dateReceived, Date dateReturned, String custID, String carID) {
         this.serviceTicketID = serviceTicketID;
         this.dateReceived = dateReceived;
         this.dateReturned = dateReturned;
@@ -58,11 +58,11 @@ public class ServiceTicket {
         this.dateReturned = dateReturned;
     }
 
-    public int getCustID() {
+    public String getCustID() {
         return custID;
     }
 
-    public void setCustID(int custID) {
+    public void setCustID(String custID) {
         this.custID = custID;
     }
 

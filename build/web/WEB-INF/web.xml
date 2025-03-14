@@ -1,5 +1,37 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app version="3.1" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
+    <servlet>
+        <servlet-name>AddService</servlet-name>
+        <servlet-class>Mechanics.AddService</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DeleteService</servlet-name>
+        <servlet-class>Mechanics.DeleteService</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>EditService</servlet-name>
+        <servlet-class>Mechanics.EditService</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>EditTicket</servlet-name>
+        <servlet-class>Mechanics.EditTicket</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>AddService</servlet-name>
+        <url-pattern>/AddService</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DeleteService</servlet-name>
+        <url-pattern>/DeleteService</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EditService</servlet-name>
+        <url-pattern>/EditService</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EditTicket</servlet-name>
+        <url-pattern>/EditTicket</url-pattern>
+    </servlet-mapping>
     <session-config>
         <session-timeout>
             30
