@@ -16,6 +16,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import model.SalePerson;
 import model.SalesInvoice;
 import model.Wishlist;
 import utils.constant.Pages;
@@ -94,6 +95,7 @@ public class WishlistDetailServlet extends HttpServlet {
         String[] carIDStr = request.getParameterValues("carID");
         String[] carRevenue = request.getParameterValues("revenue");
         int wishlistID = Integer.parseInt(request.getParameter("wishlistID"));
+        SalePerson salePerson =  (SalePerson) request.getSession().getAttribute("saleperson");
         
         ArrayList<SalesInvoice> invoices = new ArrayList<>(); 
         
@@ -101,7 +103,7 @@ public class WishlistDetailServlet extends HttpServlet {
         for(int i=0;i<carIDStr.length;i++){
             SalesInvoice invoice = new SalesInvoice(); 
             invoice.setInvoiceDate(new Date(System.currentTimeMillis()));
-            invoice.setSalesID(30121050038L);
+            invoice.setSalesID(Long.parseLong(salePerson.getId()));
             invoice.setCustID(custID);
             invoice.setId(new Random().nextInt(500000));
             invoice.setCarID(Long.parseLong(carIDStr[i]));

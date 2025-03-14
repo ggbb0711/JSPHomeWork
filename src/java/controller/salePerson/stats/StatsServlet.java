@@ -16,6 +16,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import model.CarRevenueData;
 import model.CarSoldData;
+import model.SalePerson;
 import utils.constant.Pages;
 import utils.constant.Routes;
 
@@ -65,11 +66,13 @@ public class StatsServlet extends HttpServlet {
             System.out.println(ex);
         }
         
+        SalePerson salePerson =  (SalePerson) request.getSession().getAttribute("saleperson");
+
         InvoiceDAO invoiceDAO = new InvoiceDAO();
         
-        ArrayList<CarSoldData> carSoldDataList = invoiceDAO.getCarSoldByYear(30121050038l,carSoldByYear);
-        ArrayList<CarRevenueData> carRevenueDataList = invoiceDAO.getCarRevenueByYear(30121050038l,carRevenueByYear);
-        ArrayList<CarSoldData> carModelSoldDataList = invoiceDAO.getMostSoldCarModel(30121050038l);
+        ArrayList<CarSoldData> carSoldDataList = invoiceDAO.getCarSoldByYear(Long.parseLong(salePerson.getId()),carSoldByYear);
+        ArrayList<CarRevenueData> carRevenueDataList = invoiceDAO.getCarRevenueByYear(Long.parseLong(salePerson.getId()),carRevenueByYear);
+        ArrayList<CarSoldData> carModelSoldDataList = invoiceDAO.getMostSoldCarModel(Long.parseLong(salePerson.getId()));
 
         request.setAttribute("carSoldDataList", carSoldDataList);
         request.setAttribute("carRevenueDataList", carRevenueDataList);
