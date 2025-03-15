@@ -5,9 +5,12 @@
  */
 package Mechanics;
 
+import dao.MechanicDAO;
+import model.Service;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -16,61 +19,54 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author USER
  */
+@WebServlet(name = "EditService", urlPatterns = {"/editService"})
 public class EditService extends HttpServlet {
 
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet EditService</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet EditService at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
-        }
-    }
-
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-    /**
-     * Handles the HTTP <code>GET</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            int serviceId = Integer.parseInt(request.getParameter("serviceId"));
+
+            MechanicDAO mechanicsDAO = new MechanicDAO();
+            Service service = mechanicsDAO.findServiceById(serviceId);
+
+            request.setAttribute("service", service);
+
+        } catch (Exception e) {
+            response.sendRedirect("error.jsp");
+        }
+        request.getRequestDispatcher("edit-service.jsp").forward(request, response);
     }
 
-    /**
-     * Handles the HTTP <code>POST</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        request.setCharacterEncoding("UTF-8");
+        try {
+            int serviceId = Integer.parseInt(request.getParameter("serviceId"));
+            String serviceName = request.getParameter("serviceName");
+            double hourlyRate = Double.parseDouble(request.getParameter("hourlyRate"));
+
+            MechanicDAO mechanicDAO = new MechanicDAO();
+
+            Service service = mechanicDAO.findServiceById(serviceId);
+
+            if (service == null) {
+                throw new Exception("Service not found!");
+            }
+            service.setServiceName(serviceName);
+            service.setHourlyRate(hourlyRate);
+
+            if (mechanicDAO.updateService(service)) {
+                response.sendRedirect("manage-services?action=edit&serviceId=" + serviceId);
+            } else {
+                throw new Exception("Update faild!");
+            }
+        } catch (Exception e) {
+            response.sendRedirect("error.jsp");
+        }
+
     }
 
     /**

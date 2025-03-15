@@ -182,6 +182,55 @@ public class CustomerDAO extends DBUtils {
         return partUsedList;
     }
 
+    
+    public ServiceTicket viewTicketsById(int id) throws ClassNotFoundException, SQLException {
+        String sql = "select * from ServiceTicket s\n"
+                + "join Customer c\n"
+                + "on s.custID = c.custID\n"
+                + "join Cars ca\n"
+                + "on s.carID = ca.carID\n"
+                + "where s.serviceTicketID = ?";
+        try (Connection connection = DBUtils.getConnection()) {
+            ps = connection.prepareStatement(sql);
+
+            ps.setInt(1, id);
+
+            rs = ps.executeQuery();
+
+            while (rs.next()) {
+                int serviceTickerId = rs.getInt("serviceTicketID");
+                Date dateReceived = rs.getDate("dateReceived");
+                Date dateReturned = rs.getDate("dateReturned");
+                int custID = rs.getInt("custID");
+
+                String cusName = rs.getString("custName");
+                String Phone = rs.getString("phone");
+                String sex = rs.getString("sex");
+                String address = rs.getString("cusAddress");
+
+                int carId = rs.getInt("carID");
+                String serialNumber = rs.getString("serialNumber");
+                String model = rs.getString("model");
+                String colour = rs.getString("colour");
+                int year = rs.getInt("year");
+
+                Customer customer = new Customer(custID, cusName, Phone, sex, address);
+
+                Car car = new Car(carId, serialNumber, model, colour, year);
+
+                ServiceTicket ticket = new ServiceTicket(serviceTickerId, dateReceived,
+                        dateReturned, customer, car);
+
+                return ticket;
+
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+
+        return null;
+    }
+    
     public List<SalesInvoice> getAllInvoiceByUserId(int id) throws ClassNotFoundException {
         String sql = "select * from SalesInvoice s\n"
                 + "join Customer c\n"
