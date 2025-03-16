@@ -7,11 +7,14 @@ package model;
 
 /**
  *
- * @author NGHIA
+ * @author USER
  */
 public class Mechanic {
     private long mechanicID;
     private String mechanicName;
+
+    public Mechanic() {
+    }
 
     public Mechanic(long mechanicID, String mechanicName) {
         this.mechanicID = mechanicID;
@@ -22,16 +25,21 @@ public class Mechanic {
         return mechanicID;
     }
 
-    public String getMechanicName() {
-        return mechanicName;
-    }
-
     public void setMechanicID(long mechanicID) {
         this.mechanicID = mechanicID;
     }
 
+    public String getMechanicName() {
+        return mechanicName;
+    }
+
     public void setMechanicName(String mechanicName) {
         this.mechanicName = mechanicName;
+    }
+
+    @Override
+    public String toString() {
+        return "Mechanic{" + "mechanicID=" + mechanicID + ", mechanicName=" + mechanicName + '}';
     }
     
     

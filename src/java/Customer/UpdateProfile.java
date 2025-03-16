@@ -5,6 +5,8 @@
  */
 package Customer;
 
+
+
 import dao.CustomerDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -13,7 +15,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import model.Customer;
+import model.qe170179.Customer;
 
 /**
  *
@@ -27,17 +29,15 @@ public class UpdateProfile extends HttpServlet {
         request.setCharacterEncoding("UTF-8");
         response.setContentType("text/html;charset=UTF-8");
         try {
-            
-            
             String name = request.getParameter("custName");
-            int cusPhone = rs.getInt("phone");
+            int phone = Integer.parseInt(request.getParameter("phone"));
             String sex = request.getParameter("sex");
             String cusAddress = request.getParameter("cusAddress");
             int customerId = Integer.parseInt(request.getParameter("customerId"));
 
             CustomerDAO customerDAO = new CustomerDAO();
 
-            Customer customer = new Customer(customerId, name, cusPhone, sex, cusAddress);
+            Customer customer = new Customer(customerId, name, phone, sex, cusAddress);
 
             if (!customerDAO.updateCustomer(customer)) {
                 throw new Exception("Update failed!");

@@ -7,19 +7,23 @@ package Mechanics;
 
 import dao.CustomerDAO;
 import dao.MechanicDAO;
+import dao.PartsUsed;
 import model.Service;
 import java.io.IOException;
-import java.io.PrintWriter;
+
 import java.math.BigDecimal;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import model.Mechanic;
+import model.qe170179.Mechanic;
+import model.qe170179.SaleInvoice;
 import model.ServiceMechanic;
-import model.ServiceTicket;
+import model.qe170179.ServiceTicket;
 
 /**
  *
@@ -27,7 +31,12 @@ import model.ServiceTicket;
  */
 @WebServlet(name = "EditTicket", urlPatterns = {"/editTicket"})
 public class EditTicket extends HttpServlet {
-
+    private PreparedStatement ps;
+    private ResultSet rs;
+    private List<ServiceTicket> tickets;
+    private List<PartsUsed> partUsedList;
+    private List<SaleInvoice> invoices;
+    
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {

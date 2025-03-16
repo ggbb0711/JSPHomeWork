@@ -7,11 +7,11 @@ package dao;
 import mylib.DBUtils;
 
 import model.Car;
-import model.Customer;
-import model.Mechanic;
+import model.qe170179.Customer;
+import model.qe170179.Mechanic;
 import model.Service;
 import model.ServiceMechanic;
-import model.ServiceTicket;
+import model.qe170179.ServiceTicket;
 import java.math.BigDecimal;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -62,7 +62,7 @@ public class MechanicDAO extends DBUtils {
                 int custID = rs.getInt("custID");
 
                 String cusName = rs.getString("custName");
-                int Phone = rs.getInt("phone");
+                String cusPhone = rs.getString("phone");
                 String sex = rs.getString("sex");
                 String address = rs.getString("cusAddress");
 
@@ -72,10 +72,11 @@ public class MechanicDAO extends DBUtils {
                 String colour = rs.getString("colour");
                 int year = rs.getInt("year");
 
-                Customer customer = new Customer(custID, cusName, Phone, sex, address);
+                
 
                 Car car = new Car(carId, serialNumber, model, colour, year);
-
+                Customer customer  = new Customer(custID, cusName, year, sex, address);
+                
                 ServiceTicket ticket = new ServiceTicket(serviceTickerId, dateReceived,
                         dateReturned, customer, car);
 
@@ -123,7 +124,7 @@ public class MechanicDAO extends DBUtils {
                 String colour = rs.getString("colour");
                 int year = rs.getInt("year");
 
-                Customer customer = new Customer(custID, cusName, Phone, sex, address);
+                Customer customer = new Customer(custID, cusName, cusPhone, sex, address);
 
                 Car car = new Car(carId, serialNumber, model, colour, year);
 
@@ -269,8 +270,8 @@ public class MechanicDAO extends DBUtils {
                 BigDecimal mechanicId = rs.getBigDecimal("mechanicID");
                 String name = rs.getString("mechanicName");
 
-                Mechanic mechanic = new Mechanic(mechanicID, name);
 
+                Mechanic mechanic = new Mechanic(mechanicId, name);
                 mechanics.add(mechanic);
             }
 

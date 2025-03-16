@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package model;
+package model.qe170179;
 
+import model.*;
 import java.sql.Date;
 
 /**

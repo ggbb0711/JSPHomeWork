@@ -13,8 +13,10 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/C:/Users/USER/Documents/Asm/JSPHomeWork/src/java/dao/CustomerDAO.java</file>
-            <file>file:/C:/Users/USER/Documents/Asm/JSPHomeWork/src/java/Mechanics/EditService.java</file>
-            <file>file:/C:/Users/USER/Documents/Asm/JSPHomeWork/src/java/Mechanics/EditTicket.java</file>
+            <file>file:/C:/Users/USER/Documents/Asm/JSPHomeWork/src/java/model/ServiceTicket.java</file>
+            <file>file:/C:/Users/USER/Documents/Asm/JSPHomeWork/src/java/model/qe170179/ServiceTicket.java</file>
+            <file>file:/C:/Users/USER/Documents/Asm/JSPHomeWork/src/java/dao/MechanicDAO.java</file>
+            <file>file:/C:/Users/USER/Documents/Asm/JSPHomeWork/web/style/style.css</file>
         </group>
     </open-files>
 </project-private>

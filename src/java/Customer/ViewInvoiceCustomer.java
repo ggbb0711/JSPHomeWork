@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 package Customer;
-import model.SaleInvoice;
+
 import dao.CustomerDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -16,7 +16,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import model.Customer;
-import model.SaleInvoice;
+import model.qe170179.SaleInvoice;
 
 /**
  *
