@@ -62,7 +62,7 @@ public class EditTicket extends HttpServlet {
         } catch (Exception e) {
             response.sendRedirect("error.jsp");
         }
-        request.getRequestDispatcher("edit-service-ticket.jsp").forward(request, response);
+        request.getRequestDispatcher("/views/mechanic/editserviceticket.jsp").forward(request, response);
     }
 
     @Override
@@ -83,7 +83,7 @@ public class EditTicket extends HttpServlet {
             if (!mechanicDAO.updateServiceMechanic(mechanic)) {
                 throw new Exception("Update failed");
             }
-            response.sendRedirect("manage-service-tickets?action=Edit&ticketId=" + ticketId);
+            response.sendRedirect("/JSPHomeWork/mechanic/manage-service-ticket?action=Edit&ticketId=" + ticketId);
 
         } catch (Exception e) {
             response.sendRedirect("error.jsp");

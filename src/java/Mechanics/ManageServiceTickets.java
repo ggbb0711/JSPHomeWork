@@ -23,9 +23,9 @@ import utils.constant.Routes;
 @WebServlet(name = "ManageServiceTickets", urlPatterns = {Routes.MANAGE_SERVICE_TICKETS})
 public class ManageServiceTickets extends HttpServlet {
 
-    private static final String MANAGE_SERVICE_TICKETS_PAGE = "manage-service-ticket.jsp";
-    private static final String FILTER_TICKETS_CONTROLLER = "filterTickets";
-    private static final String EDIT_TICKET_CONTROLLER = "editTicket";
+    private static final String MANAGE_SERVICE_TICKETS_PAGE = "/views/mechanic/manageserviceticket.jsp";
+    private static final String FILTER_TICKETS_CONTROLLER = "/mechanic/filterTickets";
+    private static final String EDIT_TICKET_CONTROLLER = "/mechanic/editTicket";
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {

@@ -25,8 +25,9 @@
                 <h2>Manage Service Ticket</h2>
 
                 <!-- Search Form -->
-                <form action="manage-service-tickets">
+                <form action="/JSPHomeWork/mechanic/manage-service-ticket">
                     <div class="row mb-3">
+                        
                         <div class="col-md-3">
                             <input type="text" name="carId" id="searchCarId" class="form-control" placeholder="Search by Car ID">
                         </div>
@@ -38,7 +39,7 @@
                         </div>
                         <div class="col-md-3 d-flex">
                             <button class="btn btn-primary me-2" name="action" value="filter">Search</button>
-                            <a href="manage-service-tickets" class="btn btn-secondary">Reset</a>
+                            <a href="/JSPHomeWork/mechanic/manage-service-ticket" class="btn btn-secondary">Reset</a>
                         </div>
                     </div>
                 </form>          
@@ -62,9 +63,9 @@
                             <td>${tickets.dateReceived}</td>
                             <td>${tickets.dateReturned}</td>
                             <td>${tickets.customer.custID} | ${tickets.customer.custName}</td>
-                            <td>${tickets.car.carId} | ${tickets.car.model}</td>
+                            <td>${tickets.car.carID} | ${tickets.car.model}</td>
                             <td>
-                                <a href="manage-service-tickets?action=Edit&ticketId=${tickets.serviceTicketID}" class="btn btn-warning btn-sm">Edit</a>
+                                <a href="/JSPHomeWork/mechanic/manage-service-ticket?action=Edit&ticketId=${tickets.serviceTicketID}" class="btn btn-warning btn-sm">Edit</a>
                             </td>
                         </tr>
                     </c:forEach>
