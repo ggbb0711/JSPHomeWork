@@ -14,12 +14,13 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import utils.constant.Routes;
 
 /**
  *
  * @author USER
  */
-@WebServlet(name = "EditService", urlPatterns = {"/editService"})
+@WebServlet(name = "EditService", urlPatterns = {Routes.EDIT_SERVICE})
 public class EditService extends HttpServlet {
 
     @Override

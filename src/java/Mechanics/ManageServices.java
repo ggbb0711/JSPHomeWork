@@ -15,12 +15,13 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import model.Service;
+import utils.constant.Routes;
 
 /**
  *
  * @author USER
  */
-@WebServlet(name = "ManageServices", urlPatterns = {"/manage-services"})
+@WebServlet(name = "ManageServices", urlPatterns = {Routes.MANAGE_SERVICE})
 public class ManageServices extends HttpServlet {
 
     private static final String MANAGE_SERVICES_PAGE = "manage-services.jsp";

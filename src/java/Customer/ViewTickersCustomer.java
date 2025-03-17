@@ -16,12 +16,13 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import utils.constant.Routes;
 
 /**
  *
  * @author USER
  */
-@WebServlet(name = "ViewTickersCustomer", urlPatterns = {"/viewTickets"})
+@WebServlet(name = "ViewTickersCustomer", urlPatterns = {Routes.VIEW_SERVICE_TICKET_CUSTOMER})
 public class ViewTickersCustomer extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)

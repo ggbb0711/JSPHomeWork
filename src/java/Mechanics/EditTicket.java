@@ -24,12 +24,13 @@ import model.qe170179.Mechanic;
 import model.qe170179.SaleInvoice;
 import model.ServiceMechanic;
 import model.qe170179.ServiceTicket;
+import utils.constant.Routes;
 
 /**
  *
  * @author USER
  */
-@WebServlet(name = "EditTicket", urlPatterns = {"/editTicket"})
+@WebServlet(name = "EditTicket", urlPatterns = {Routes.EDIT_TICKETS})
 public class EditTicket extends HttpServlet {
     private PreparedStatement ps;
     private ResultSet rs;

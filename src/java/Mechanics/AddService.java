@@ -14,9 +14,10 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import utils.constant.Routes;
 
 
-@WebServlet(name = "AddService", urlPatterns = {"/addService"})
+@WebServlet(name = "AddService", urlPatterns = {Routes.ADD_SERVICE})
 public class AddService extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)

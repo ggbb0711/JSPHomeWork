@@ -12,19 +12,8 @@
     </editor-bookmarks>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/USER/Documents/Asm/JSPHomeWork/web/error.jsp</file>
-            <file>file:/C:/Users/USER/Documents/Asm/JSPHomeWork/web/serviceticketscustomer.jsp</file>
-            <file>file:/C:/Users/USER/Documents/Asm/JSPHomeWork/web/login.jsp</file>
-            <file>file:/C:/Users/USER/Documents/Asm/JSPHomeWork/web/invoicecustomer.jsp</file>
-            <file>file:/C:/Users/USER/Documents/Asm/JSPHomeWork/web/home.jsp</file>
-            <file>file:/C:/Users/USER/Documents/Asm/JSPHomeWork/web/viewprofile.jsp</file>
-            <file>file:/C:/Users/USER/Documents/Asm/JSPHomeWork/web/editservice.jsp</file>
-            <file>file:/C:/Users/USER/Documents/Asm/JSPHomeWork/web/editserviceticket.jsp</file>
-            <file>file:/C:/Users/USER/Documents/Asm/JSPHomeWork/web/manageserviceticket.jsp</file>
-            <file>file:/C:/Users/USER/Documents/Asm/JSPHomeWork/web/views/salePerson/components/header.jsp</file>
-            <file>file:/C:/Users/USER/Documents/Asm/JSPHomeWork/src/java/controller/salePerson/stats/MechanicStatsServlet.java</file>
-            <file>file:/C:/Users/USER/Documents/Asm/JSPHomeWork/web/views/salePerson/parts/components/newPartsForm.jsp</file>
-            <file>file:/C:/Users/USER/Documents/Asm/JSPHomeWork/web/manageservice.jsp</file>
+            <file>file:/C:/Users/USER/Documents/Asm/JSPHomeWork/src/java/utils/constant/Routes.java</file>
+            <file>file:/C:/Users/USER/Documents/Asm/JSPHomeWork/src/java/utils/constant/Pages.java</file>
         </group>
     </open-files>
 </project-private>

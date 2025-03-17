@@ -14,12 +14,13 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import model.qe170179.ServiceTicket;
+import utils.constant.Routes;
 
 /**
  *
  * @author USER
  */
-@WebServlet(name = "ManageServiceTickets", urlPatterns = {"/manage-service-tickets"})
+@WebServlet(name = "ManageServiceTickets", urlPatterns = {Routes.MANAGE_SERVICE_TICKETS})
 public class ManageServiceTickets extends HttpServlet {
 
     private static final String MANAGE_SERVICE_TICKETS_PAGE = "manage-service-ticket.jsp";

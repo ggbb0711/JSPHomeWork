@@ -1,0 +1,16 @@
+SMAP
+partsUsedStatsPage_jsp.java
+JSP
+*S JSP
+*F
++ 0 partsUsedStatsPage.jsp
+views/salePerson/stats/partsUsedStatsPage.jsp
+*L
+5,8:44
+13,2:52,3
+15,3:58
+18,2:61,3
+20,4:67
+24:71,3
+25,5:74
+*E

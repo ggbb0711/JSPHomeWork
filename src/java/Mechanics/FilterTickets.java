@@ -15,12 +15,13 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import model.qe170179.ServiceTicket;
+import utils.constant.Routes;
 
 /**
  *
  * @author USER
  */
-@WebServlet(name = "FilterTickets", urlPatterns = {"/filterTickets"})
+@WebServlet(name = "FilterTickets", urlPatterns = {Routes.FILTER_TICKETS})
 public class FilterTickets extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)

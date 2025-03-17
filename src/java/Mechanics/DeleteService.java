@@ -14,12 +14,13 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import utils.constant.Routes;
 
 /**
  *
  * @author USER
  */
-@WebServlet(name = "DeleteService", urlPatterns = {"/deleteService"})
+@WebServlet(name = "DeleteService", urlPatterns = {Routes.DELETE_SERVICE})
 public class DeleteService extends HttpServlet {
     
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)

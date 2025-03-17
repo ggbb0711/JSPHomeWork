@@ -16,12 +16,13 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import model.qe170179.Customer;
+import utils.constant.Routes;
 
 /**
  *
  * @author USER
  */
-@WebServlet(name = "UpdateProfile", urlPatterns = {"/updateProfile"})
+@WebServlet(name = "UpdateProfile", urlPatterns = {Routes.UPDATE_PROFILE})
 public class UpdateProfile extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)

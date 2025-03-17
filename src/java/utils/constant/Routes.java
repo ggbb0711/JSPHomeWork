@@ -18,4 +18,14 @@ public class Routes {
     public static final String STATS_PARTS_USED = "/sales-person/stats-parts-used";
     public static final String STATS_TOP_MECHANIC = "/sales-person/top-mechanic";
     public static final String INVOICE_CUSTOMER = "/customer/invoice";
+    public static final String VIEW_SERVICE_TICKET_CUSTOMER = "/customer/viewTickets";
+    public static final String UPDATE_PROFILE = "/customer/updateProfile";
+    public static final String VIEW_PROFILE = "/customer/viewProfile";
+    public static final String ADD_SERVICE = "/mechanic/addService";
+    public static final String DELETE_SERVICE = "/mechanic/deleteService";
+    public static final String EDIT_SERVICE = "/mechanic/editService";
+    public static final String EDIT_TICKETS = "/mechanic/editTicket";
+    public static final String FILTER_TICKETS = "/mechanic/filterTickets";
+    public static final String MANAGE_SERVICE_TICKETS = "/mechanic/filterTickets";
+    public static final String MANAGE_SERVICE = "/mechanic/manage-services";
 }

@@ -16,11 +16,12 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import utils.constant.Routes;
 /**
  *
  * @author USER
  */
-@WebServlet(name = "ViewProfile", urlPatterns = {"/viewProfile"})
+@WebServlet(name = "ViewProfile", urlPatterns = {Routes.VIEW_PROFILE})
 public class ViewProfile extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
