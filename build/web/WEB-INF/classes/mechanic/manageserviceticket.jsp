@@ -18,7 +18,7 @@
     </head>
     <body>
 
-        <jsp:include page="common/side-bar-dashboard.jsp"></jsp:include>
+        
 
             <!-- Main Content -->
             <div class="content">

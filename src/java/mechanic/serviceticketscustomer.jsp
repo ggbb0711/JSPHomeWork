@@ -23,61 +23,9 @@
         <link rel="stylesheet" type="text/css" href="style/mystyle.css">
         <link rel="stylesheet" type="text/css" href="source/custom-css/header-customer.css">
 
-        <style>
-            .ticket-container {
-                padding: 20px;
-                margin: 20px auto;
-                max-width: 800px;
-                border: 1px solid #e0e0e0;
-                border-radius: 8px;
-                background-color: #ffffff;
-                box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-                transition: box-shadow 0.3s ease;
-            }
-
-            .ticket-container:hover {
-                box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
-            }
-
-            .ticket-section {
-                margin-bottom: 25px;
-                padding: 20px;
-                background-color: #f7f7f7;
-                border-radius: 5px;
-            }
-
-            .ticket-section h3 {
-                color: #2c3e50;
-                font-size: 1.5em;
-                margin-bottom: 20px;
-                padding-bottom: 10px;
-                border-bottom: 2px solid #3498db;
-                font-weight: 600;
-            }
-
-            .ticket-section p {
-                margin: 10px 0;
-                font-size: 1.1em;
-                color: #444;
-                line-height: 1.6;
-            }
-
-            .ticket-section strong {
-                color: #2c3e50;
-                font-weight: 600;
-                min-width: 130px;
-                display: inline-block;
-            }
-
-            .ticket-section p:not(:last-child) {
-                border-bottom: 1px dashed #eee;
-                padding-bottom: 10px;
-            }
-        </style>
-    </head>
-    <body>
+       
         <!-- Header -->
-        <jsp:include page="common/header.jsp"></jsp:include>
+       
 
             <div class="allcontain">
                 <h1 class="text-center">• SERVICE TICKETS •</h1>
