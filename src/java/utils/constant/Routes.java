@@ -26,6 +26,6 @@ public class Routes {
     public static final String EDIT_SERVICE = "/mechanic/editService";
     public static final String EDIT_TICKETS = "/mechanic/editTicket";
     public static final String FILTER_TICKETS = "/mechanic/filterTickets";
-    public static final String MANAGE_SERVICE_TICKETS = "/mechanic/filterTickets";
+    public static final String MANAGE_SERVICE_TICKETS = "/mechanic/manage-service-ticket";
     public static final String MANAGE_SERVICE = "/mechanic/manage-services";
 }
