@@ -1,4 +1,4 @@
-<%-- 
+    <%-- 
     Document   : home
     Created on : Mar 16, 2025, 1:54:10 PM
     Author     : USER
@@ -23,10 +23,10 @@
     </head>
     <body>
         <!-- Header -->
-        <jsp:include page="common/header.jsp"></jsp:include>
+      
             <!-- Header -->
             <!--_______________________________________ Carousel__________________________________ -->
-        <jsp:include page="common/Carousel.jsp"></jsp:include>
+       
             <!-- ____________________Featured Section ______________________________--> 
             <div class="allcontain">
 
@@ -80,7 +80,7 @@
                     </div>
                 </div>
 
-            <jsp:include page="common/footer.jsp"></jsp:include>
+            
         </div>
         <script type="text/javascript" src="source/js/header-customer.js"></script>
         <script type="text/javascript" src="source/bootstrap-3.3.6-dist/js/jquery.js"></script>

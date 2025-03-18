@@ -17,14 +17,15 @@
         <link rel="stylesheet" type="text/css" href="source/custon-css/dashboard-custom.css">
     </head>
     <body>
-        <jsp:include page="common/side-bar-dashboard.jsp"></jsp:include>
+
+        
 
             <!-- Main Content -->
             <div class="content">
                 <h2>Manage Services</h2>
 
                 <!-- Search Form -->
-                <form action="manage-services">
+                <form action="/JSPHomeWork/mechanic/manage-services">
                     <div class="row mb-3">
                         <div class="col-md-4">
                             <input type="text" name="serviceName" id="searchServiceName" class="form-control" 
@@ -36,7 +37,7 @@
                     </div>
                     <div class="col-md-4 d-flex">
                         <button class="btn btn-primary me-2" name="action" value="search">Search</button>
-                        <a href="manage-services" class="btn btn-secondary me-2">Reset</a>
+                        <a href="/JSPHomeWork/mechanic/manage-services" class="btn btn-secondary me-2">Reset</a>
                         <button type="button" class="btn btn-success" data-bs-toggle="modal" 
                                 data-bs-target="#addServiceModal">Add New Service</button>
                     </div>
@@ -60,9 +61,9 @@
                             <td>${service.serviceName}</td>
                             <td>${service.hourlyRate}</td>
                             <td>
-                                <a href="manage-services?action=edit&serviceId=${service.serviceID}" 
+                                <a href="/JSPHomeWork/mechanic/manage-services?action=edit&serviceID=${service.serviceID}" 
                                    class="btn btn-warning btn-sm">Edit</a>
-                                <a href="manage-services?action=delete&serviceId=${service.serviceID}" 
+                                <a href="/JSPHomeWork/mechanic/manage-services?action=delete&serviceID=${service.serviceID}" 
                                    class="btn btn-danger btn-sm" 
                                    onclick="return confirm('Are you sure you want to delete this service?');">Delete</a>
                             </td>
@@ -76,7 +77,7 @@
         <div class="modal fade" id="addServiceModal" tabindex="-1" aria-labelledby="addServiceModalLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
-                    <form action="manage-services" method="post">
+                    <form action="/JSPHomeWork/mechanic/AddService" method="post">
                         <div class="modal-header">
                             <h5 class="modal-title" id="addServiceModalLabel">Add New Service</h5>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>

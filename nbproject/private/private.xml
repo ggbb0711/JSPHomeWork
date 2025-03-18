@@ -11,6 +11,13 @@
         </file>
     </editor-bookmarks>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group/>
+        <group>
+            <file>file:/C:/Users/USER/Documents/Asm/JSPHomeWork/src/java/Customer/UpdateProfile.java</file>
+            <file>file:/C:/Users/USER/Documents/Asm/JSPHomeWork/src/java/Mechanics/AddService.java</file>
+            <file>file:/C:/Users/USER/Documents/Asm/JSPHomeWork/web/views/mechanic/viewprofile.jsp</file>
+            <file>file:/C:/Users/USER/Documents/Asm/JSPHomeWork/src/java/Customer/ViewProfile.java</file>
+            <file>file:/C:/Users/USER/Documents/Asm/JSPHomeWork/src/java/Customer/Login.java</file>
+            <file>file:/C:/Users/USER/Documents/Asm/JSPHomeWork/web/views/mechanic/login.jsp</file>
+        </group>
     </open-files>
 </project-private>

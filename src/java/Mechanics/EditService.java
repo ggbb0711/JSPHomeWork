@@ -27,7 +27,7 @@ public class EditService extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         try {
-            int serviceId = Integer.parseInt(request.getParameter("serviceId"));
+            int serviceId = Integer.parseInt(request.getParameter("serviceID"));
 
             MechanicDAO mechanicsDAO = new MechanicDAO();
             Service service = mechanicsDAO.findServiceById(serviceId);
@@ -37,7 +37,7 @@ public class EditService extends HttpServlet {
         } catch (Exception e) {
             response.sendRedirect("error.jsp");
         }
-        request.getRequestDispatcher("edit-service.jsp").forward(request, response);
+        request.getRequestDispatcher("/JSPHomeWork/mechanic/editService.jsp").forward(request, response);
     }
 
     @Override
@@ -45,7 +45,7 @@ public class EditService extends HttpServlet {
             throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
         try {
-            int serviceId = Integer.parseInt(request.getParameter("serviceId"));
+            int serviceId = Integer.parseInt(request.getParameter("serviceID"));
             String serviceName = request.getParameter("serviceName");
             double hourlyRate = Double.parseDouble(request.getParameter("hourlyRate"));
 
@@ -60,7 +60,7 @@ public class EditService extends HttpServlet {
             service.setHourlyRate(hourlyRate);
 
             if (mechanicDAO.updateService(service)) {
-                response.sendRedirect("manage-services?action=edit&serviceId=" + serviceId);
+                response.sendRedirect("/JSPHomeWork/mechanic/manage-services?action=edit&serviceId=" + serviceId);
             } else {
                 throw new Exception("Update faild!");
             }

@@ -106,7 +106,7 @@
                                     <h2>Personal Information</h2>
                                     <p><strong>Customer ID:</strong> ${infor.custID}</p>
 
-                                    <form id="profileForm" action="/JSPHomeWork/mechanic/updateProfile" method="post">
+                                    <form id="profileForm" action="/JSPHomeWork/mechanic/ViewProfile" method="post">
                                         <div class="form-group">
                                             <label for="custName"><strong>Name:</strong></label>
                                             <input type="text" class="form-control" id="custName" name="custName" value="${infor.custName}" required>
@@ -146,13 +146,5 @@
         <!-- Footer -->
        
 
-        <script type="text/javascript" src="source/js/header-customer.js"></script>
-        <script type="text/javascript" src="source/bootstrap-3.3.6-dist/js/jquery.js"></script>
-        <script type="text/javascript" src="source/js/isotope.js"></script>
-        <script type="text/javascript" src="source/js/myscript.js"></script> 
-        <script type="text/javascript" src="source/bootstrap-3.3.6-dist/js/jquery.1.11.js"></script>
-        <script type="text/javascript" src="source/bootstrap-3.3.6-dist/js/bootstrap.js"></script>
-        <script type="text/javascript">
-        </script>
-    </body>
+          </body>
 </html>

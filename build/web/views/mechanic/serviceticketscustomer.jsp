@@ -71,7 +71,7 @@
         </div>
 
         <!-- Footer -->
-        <jsp:include page="common/footer.jsp"></jsp:include>
+     
 
         <script type="text/javascript" src="source/js/header-customer.js"></script>
         <script type="text/javascript" src="source/bootstrap-3.3.6-dist/js/jquery.js"></script>

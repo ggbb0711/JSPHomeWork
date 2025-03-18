@@ -19,8 +19,8 @@
                 <h2>Edit Service</h2>
 
                 <!-- Edit Service Form -->
-                <form action="editService" method="post">
-                    <input type="hidden" name="serviceId" value="${service.serviceID}">
+                <form action="//JSPHomeWork/mechanic/EditService" method="post">
+                    <input type="hidden" name="serviceID" value="${service.serviceID}">
                 <div class="row mb-3">
                     <div class="col-md-6">
                         <label for="serviceName" class="form-label">Service Name</label>
@@ -36,7 +36,7 @@
                 <div class="row mb-3">
                     <div class="col-md-12 d-flex">
                         <button type="submit" class="btn btn-primary me-2" name="action" value="update">Update Service</button>
-                        <a href="manage-services" class="btn btn-secondary">Cancel</a>
+                        <a href="/JSPHomeWork/mechanic/manage-service-ticket" class="btn btn-secondary">Cancel</a>
                     </div>
                 </div>
             </form>

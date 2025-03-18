@@ -74,8 +74,9 @@ public final class manageserviceticket_jsp extends org.apache.jasper.runtime.Htt
       out.write("                <h2>Manage Service Ticket</h2>\n");
       out.write("\n");
       out.write("                <!-- Search Form -->\n");
-      out.write("                <form action=\"manage-service-tickets\">\n");
+      out.write("                <form action=\"/JSPHomeWork/mechanic/manage-service-ticket\">\n");
       out.write("                    <div class=\"row mb-3\">\n");
+      out.write("                        \n");
       out.write("                        <div class=\"col-md-3\">\n");
       out.write("                            <input type=\"text\" name=\"carId\" id=\"searchCarId\" class=\"form-control\" placeholder=\"Search by Car ID\">\n");
       out.write("                        </div>\n");
@@ -87,7 +88,7 @@ public final class manageserviceticket_jsp extends org.apache.jasper.runtime.Htt
       out.write("                        </div>\n");
       out.write("                        <div class=\"col-md-3 d-flex\">\n");
       out.write("                            <button class=\"btn btn-primary me-2\" name=\"action\" value=\"filter\">Search</button>\n");
-      out.write("                            <a href=\"manage-service-tickets\" class=\"btn btn-secondary\">Reset</a>\n");
+      out.write("                            <a href=\"/JSPHomeWork/mechanic/manage-service-ticket\" class=\"btn btn-secondary\">Reset</a>\n");
       out.write("                        </div>\n");
       out.write("                    </div>\n");
       out.write("                </form>          \n");
@@ -159,12 +160,12 @@ public final class manageserviceticket_jsp extends org.apache.jasper.runtime.Htt
           out.write((java.lang.String) org.apache.jasper.runtime.PageContextImpl.evaluateExpression("${tickets.customer.custName}", java.lang.String.class, (PageContext)_jspx_page_context, null));
           out.write("</td>\n");
           out.write("                            <td>");
-          out.write((java.lang.String) org.apache.jasper.runtime.PageContextImpl.evaluateExpression("${tickets.car.carId}", java.lang.String.class, (PageContext)_jspx_page_context, null));
+          out.write((java.lang.String) org.apache.jasper.runtime.PageContextImpl.evaluateExpression("${tickets.car.carID}", java.lang.String.class, (PageContext)_jspx_page_context, null));
           out.write(" | ");
           out.write((java.lang.String) org.apache.jasper.runtime.PageContextImpl.evaluateExpression("${tickets.car.model}", java.lang.String.class, (PageContext)_jspx_page_context, null));
           out.write("</td>\n");
           out.write("                            <td>\n");
-          out.write("                                <a href=\"manage-service-tickets?action=Edit&ticketId=");
+          out.write("                                <a href=\"/JSPHomeWork/mechanic/manage-service-ticket?action=Edit&ticketId=");
           out.write((java.lang.String) org.apache.jasper.runtime.PageContextImpl.evaluateExpression("${tickets.serviceTicketID}", java.lang.String.class, (PageContext)_jspx_page_context, null));
           out.write("\" class=\"btn btn-warning btn-sm\">Edit</a>\n");
           out.write("                            </td>\n");
