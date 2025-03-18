@@ -37,7 +37,7 @@
         </div>
         <div class="collapse navbar-collapse" id="upmenu">
             <ul class="nav navbar-nav" id="navbarontop">
-                <li class="active"><a href="home">HOME</a> </li>
+                <li class="active"><a href="${pageContext.request.contextPath}/customer">HOME</a> </li>
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle"	data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">CATEGORIES <span class="caret"></span></a>
                     <ul class="dropdown-menu dropdowncostume">
@@ -57,11 +57,12 @@
                 <c:if test="${sessionScope.customer != null}">
 
                     <li>
-                        <a href="viewTickets">My Tickets</a>
+                        <a href="${pageContext.request.contextPath}/customer/invoice">My Invoices</a>
                     </li>
                     <li>
-                        <a href="viewInvoices">My Invoices</a>
+                        <a href="${pageContext.request.contextPath}/customer/viewTickets">My Tickets</a>
                     </li>
+
                 </c:if>
                 <c:if test="${sessionScope.customer == null}">
                     <li>

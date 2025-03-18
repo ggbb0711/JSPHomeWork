@@ -19,7 +19,7 @@
                 <h2>Edit Service</h2>
 
                 <!-- Edit Service Form -->
-                <form action="editService" method="post">
+                <form action="${pageContext.request.contextPath}/mechanic/editService" method="post">
                     <input type="hidden" name="serviceId" value="${service.serviceID}">
                 <div class="row mb-3">
                     <div class="col-md-6">

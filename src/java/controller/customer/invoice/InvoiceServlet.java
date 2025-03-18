@@ -13,7 +13,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import model.SalesInvoice;
+import model.qe170179.Customer;
 import utils.constant.Pages;
 import utils.constant.Routes;
 
@@ -51,8 +53,10 @@ public class InvoiceServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        HttpSession session = request.getSession();
+        Customer customer = (Customer) session.getAttribute("customer");
         InvoiceDAO invoiceDAO = new InvoiceDAO();
-        ArrayList<SalesInvoice> customerInvoices = invoiceDAO.getCarRevenueByUserID(11076);
+        ArrayList<SalesInvoice> customerInvoices = invoiceDAO.getCarRevenueByUserID(customer.getCustID());
         request.setAttribute("customerInvoices", customerInvoices);
         request.getRequestDispatcher(Pages.INVOICE_CUSTOMER_PAGE).forward(request, response);
     }

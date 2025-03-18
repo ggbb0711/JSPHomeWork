@@ -60,7 +60,7 @@ public class EditService extends HttpServlet {
             service.setHourlyRate(hourlyRate);
 
             if (mechanicDAO.updateService(service)) {
-                response.sendRedirect("manage-services?action=edit&serviceId=" + serviceId);
+                response.sendRedirect(request.getContextPath()+"/mechanic/manage-services?action=edit&serviceId=" + serviceId);
             } else {
                 throw new Exception("Update faild!");
             }

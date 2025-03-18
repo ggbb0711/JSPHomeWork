@@ -83,7 +83,7 @@
                 <div class="error-message">${msg}</div>
             </c:if>
 
-            <form action="login" method="post">
+            <form action="${pageContext.request.contextPath}/login/customer" method="post">
                 <div class="form-group">
                     <label for="name">Họ và tên:</label>
                     <input type="text" id="name" name="name" required>
@@ -95,7 +95,11 @@
                 </div>
 
                 <button type="submit" class="btn-submit">Đăng Nhập</button>
+
             </form>
+            <a href="${pageContext.request.contextPath}">
+               <button style="margin-top: 4px" class="btn btn-primary">Login as a different user</button>
+            </a>
         </div>
 
         <script>

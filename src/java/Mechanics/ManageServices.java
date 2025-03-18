@@ -24,10 +24,10 @@ import utils.constant.Routes;
 @WebServlet(name = "ManageServices", urlPatterns = {Routes.MANAGE_SERVICE})
 public class ManageServices extends HttpServlet {
 
-    private static final String MANAGE_SERVICES_PAGE = "manage-services.jsp";
-    private static final String ADD_SERVICE_CONTROLLER = "addService";
-    private static final String EDIT_SERVICE_CONTROLLER = "editService";
-    private static final String DELETE_SERVICE_CONTROLLER = "deleteService";
+    private static final String MANAGE_SERVICES_PAGE = "/views/mechanic/manage-services.jsp";
+    private static final String ADD_SERVICE_CONTROLLER = "/mechanic/addService";
+    private static final String EDIT_SERVICE_CONTROLLER = "/mechanic/editService";
+    private static final String DELETE_SERVICE_CONTROLLER = "/mechanic/deleteService";
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -51,13 +51,13 @@ public class ManageServices extends HttpServlet {
 
             switch (action) {
                 case "add":
-                    url = ADD_SERVICE_CONTROLLER;
+                    url = request.getContextPath()+ ADD_SERVICE_CONTROLLER;
                     break;
                 case "edit":
-                    url = EDIT_SERVICE_CONTROLLER;
+                    url = request.getContextPath()+EDIT_SERVICE_CONTROLLER;
                     break;
                 case "delete":
-                    url = DELETE_SERVICE_CONTROLLER;
+                    url = request.getContextPath()+DELETE_SERVICE_CONTROLLER;
                     break;
 
             }

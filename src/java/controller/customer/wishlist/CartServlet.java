@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import model.Car;
+import model.qe170179.Customer;
 import utils.constant.Pages;
 import utils.constant.Routes;
 
@@ -68,10 +69,11 @@ public class CartServlet extends HttpServlet {
         ArrayList<Car> cart = new ArrayList<>();
         HttpSession session = request.getSession();
         if(session.getAttribute("cartItems")!=null) cart = (ArrayList<Car>) session.getAttribute("cartItems");
-        
+        Customer customer = (Customer) session.getAttribute("customer");
+
         if(cart.size()>0){
             WishlistDAO wishlistDAO = new WishlistDAO();
-            if(!wishlistDAO.createWishlist(11076, cart)) request.setAttribute("wishlistMsg", "Failed to add to wishlist");
+            if(!wishlistDAO.createWishlist(customer.getCustID(), cart)) request.setAttribute("wishlistMsg", "Failed to add to wishlist");
             else session.setAttribute("cartItems",new ArrayList<>());
         }
         request.getRequestDispatcher(Pages.WISHLIST_CUSTOMER_PAGE).forward(request, response);

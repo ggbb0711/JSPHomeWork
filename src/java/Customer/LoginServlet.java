@@ -3,12 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package controller.salePerson.stats;
+package Customer;
 
-import dao.MechanicDAO;
+import dao.CustomerDAO;
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
@@ -16,16 +15,16 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import model.TopMechanicData;
-import utils.constant.Pages;
+import javax.servlet.http.HttpSession;
 import utils.constant.Routes;
+import model.qe170179.Customer;
 
 /**
  *
  * @author NGHIA
  */
-@WebServlet(name = "MechanicStatsServlet", urlPatterns = {Routes.STATS_TOP_MECHANIC})
-public class MechanicStatsServlet extends HttpServlet {
+@WebServlet(name = "LoginServlet", urlPatterns = {Routes.LOGIN_CUSTOMER})
+public class LoginServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -38,7 +37,6 @@ public class MechanicStatsServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -53,16 +51,7 @@ public class MechanicStatsServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        try {
-            MechanicDAO mechanicDAO = new MechanicDAO();
-            ArrayList<TopMechanicData> topMechanicData = mechanicDAO.getTopMechanic();
-            request.setAttribute("topMechanicData", topMechanicData);
-            request.getRequestDispatcher(Pages.STATS_TOP_3_MECHANIC_PAGE).forward(request,response);
-        } catch (SQLException ex) {
-            Logger.getLogger(MechanicStatsServlet.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(MechanicStatsServlet.class.getName()).log(Level.SEVERE, null, ex);
-        }
+
     }
 
     /**
@@ -76,7 +65,27 @@ public class MechanicStatsServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        request.setCharacterEncoding("UTF-8");
+        String name = request.getParameter("name");
+        String phone = request.getParameter("phone");
+        
+        CustomerDAO customerDAO = new CustomerDAO();
+        try {
+            Customer customer = customerDAO.login(name, phone);
+            if(customer!=null){
+                HttpSession session = request.getSession();
+                session.setAttribute("customer", customer);
+                response.sendRedirect(request.getContextPath()+"/customer");
+            } 
+            else{
+                request.setAttribute("msg", "Failed to login");
+                request.getRequestDispatcher("/views/mechanic/login.jsp").forward(request, response);
+            }
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(LoginServlet.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(LoginServlet.class.getName()).log(Level.SEVERE, null, ex);
+        }    
     }
 
     /**

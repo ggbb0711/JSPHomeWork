@@ -8,6 +8,7 @@
     <div class="header-navs">
         <a class="header-nav" href="${pageContext.request.contextPath}/customer">AVAILABLE CARS</a>
         <a class="header-nav" href="${pageContext.request.contextPath}/customer/invoice">INVOICES</a>
+        <a class="header-nav" href="${pageContext.request.contextPath}/customer/viewTickets">TICKETS</a>
     </div>
     <div class="header-user-info">
         <a class="shopping-cart-container" href="${pageContext.request.contextPath}/customer/cart">
@@ -18,6 +19,6 @@
                 shopping_cart
             </span>
         </a>
-        <p>Hello user, <a class="header-nav" href="#">LOGOUT</a></p>
+        <p>Hello ${sessionScope.customer.getCustName()}, <a class="header-nav" href="#">LOGOUT</a></p>
     </div>
 </header>

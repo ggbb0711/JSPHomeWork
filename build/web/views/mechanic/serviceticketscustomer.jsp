@@ -56,7 +56,7 @@
                                                 </c:otherwise>
                                             </c:choose>
                                         </p>
-                                        <p><strong>Cart ID:</strong> ${ticket.car.carId}</p>
+                                        <p><strong>Cart ID:</strong> ${ticket.car.carID}</p>
                                         <p><strong>Serial Number:</strong> ${ticket.car.serialNumber}</p>
                                         <p><strong>Model:</strong> ${ticket.car.model}</p>
                                         <p><strong>Color:</strong> ${ticket.car.colour}</p>
@@ -70,8 +70,6 @@
             </c:choose>
         </div>
 
-        <!-- Footer -->
-        <jsp:include page="common/footer.jsp"></jsp:include>
 
         <script type="text/javascript" src="source/js/header-customer.js"></script>
         <script type="text/javascript" src="source/bootstrap-3.3.6-dist/js/jquery.js"></script>

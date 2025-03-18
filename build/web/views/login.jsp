@@ -20,6 +20,9 @@
             <a href="${pageContext.request.contextPath}/login/sales-person">
                 <button class="btn btn-primary">SALE PERSON</button>
             </a>
+            <a href="${pageContext.request.contextPath}/views/mechanic/login.jsp">
+                <button class="btn btn-primary">CUSTOMER</button>
+            </a>
         </div>
     </body>
 </html>

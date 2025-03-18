@@ -32,7 +32,7 @@ public class DeleteService extends HttpServlet {
             MechanicDAO mechanicDAO = new MechanicDAO();
             
             if (mechanicDAO.deleteService(serviceId)) {
-                response.sendRedirect("manage-services");
+                response.sendRedirect(request.getContextPath()+"/mechanic/manage-services");
             } else {
                 throw new Exception("Delete fail!");
             }

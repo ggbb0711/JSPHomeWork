@@ -31,7 +31,7 @@ public class AddService extends HttpServlet {
 
             Service service = new Service(0, serviceName, hourlyRate);
             if (mechanicDAO.addService(service)) {
-                response.sendRedirect("manage-services");
+                response.sendRedirect(request.getContextPath()+"/mechanic/manage-services");
 
             } else {
                 throw new Exception("Add failed");

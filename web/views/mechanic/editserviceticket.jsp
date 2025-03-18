@@ -77,7 +77,7 @@
                     </thead>
                     <tbody>
                         <c:forEach var="servicesMechanic" items="${servicesMechanic}">
-                        <form action="editTicket" method="POST">
+                        <form action="${pageContext.request.contextPath}/mechanic/editTicket" method="POST">
                             <tr>
                                 <!-- Hiển thị Mechanic ID và Name, tránh load trùng -->
                                 <td>

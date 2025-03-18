@@ -5,15 +5,15 @@
  */
 package model.qe170179;
 
+import java.io.Serializable;
 import java.sql.Date;
 import model.Car;
-import model.qe170179.Customer;
 
 /**
  *
  * @author USER
  */
-public class ServiceTicket {
+public class ServiceTicket implements Serializable {
 
     private int serviceTicketID;
     private Date dateReceived;
