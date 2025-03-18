@@ -58,8 +58,8 @@ public final class editservice_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("                <h2>Edit Service</h2>\n");
       out.write("\n");
       out.write("                <!-- Edit Service Form -->\n");
-      out.write("                <form action=\"editService\" method=\"post\">\n");
-      out.write("                    <input type=\"hidden\" name=\"serviceId\" value=\"");
+      out.write("                <form action=\"/JSPHomeWork/mechanic/EditService\" method=\"post\">\n");
+      out.write("                    <input type=\"hidden\" name=\"serviceID\" value=\"");
       out.write((java.lang.String) org.apache.jasper.runtime.PageContextImpl.evaluateExpression("${service.serviceID}", java.lang.String.class, (PageContext)_jspx_page_context, null));
       out.write("\">\n");
       out.write("                <div class=\"row mb-3\">\n");

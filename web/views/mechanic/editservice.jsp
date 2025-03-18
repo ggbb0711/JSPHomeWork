@@ -19,7 +19,7 @@
                 <h2>Edit Service</h2>
 
                 <!-- Edit Service Form -->
-                <form action="//JSPHomeWork/mechanic/EditService" method="post">
+                <form action="/JSPHomeWork/mechanic/EditService" method="post">
                     <input type="hidden" name="serviceID" value="${service.serviceID}">
                 <div class="row mb-3">
                     <div class="col-md-6">
