@@ -9,6 +9,7 @@
         <a class="header-nav" href="${pageContext.request.contextPath}/customer">AVAILABLE CARS</a>
         <a class="header-nav" href="${pageContext.request.contextPath}/customer/invoice">INVOICES</a>
         <a class="header-nav" href="${pageContext.request.contextPath}/customer/viewTickets">TICKETS</a>
+        <a class="header-nav" href="${pageContext.request.contextPath}/customer/viewProfile">PROFILE</a>
     </div>
     <div class="header-user-info">
         <a class="shopping-cart-container" href="${pageContext.request.contextPath}/customer/cart">

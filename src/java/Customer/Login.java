@@ -23,18 +23,19 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import utils.constant.Routes;
 
 /**
  *
  * @author TNO
  */
-@WebServlet(name = "Login", urlPatterns = {"customer/login"})
+@WebServlet(name = "Login", urlPatterns = {"/customer/login"})
 public class Login extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        request.getRequestDispatcher("views/mechanic/login.jsp").forward(request, response);
+        request.getRequestDispatcher("/views/mechanic/login.jsp").forward(request, response);
     }
 
     @Override
@@ -61,7 +62,7 @@ public class Login extends HttpServlet {
                 HttpSession sesson = request.getSession();
                 sesson.setAttribute("customer", customer);
 
-                response.sendRedirect("home");
+                response.sendRedirect(request.getContextPath()+Routes.AVAILABLE_CAR_CUSTOMER);
                 return;
 
             }

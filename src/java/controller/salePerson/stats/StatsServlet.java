@@ -60,6 +60,12 @@ public class StatsServlet extends HttpServlet {
         
         try{
             carSoldByYear = Integer.parseInt(request.getParameter("carSoldByYear"));
+        }
+        catch(NumberFormatException ex){
+            System.out.println(ex);
+        }
+        
+        try{
             carRevenueByYear = Integer.parseInt(request.getParameter("carRevenueByYear"));
         }
         catch(NumberFormatException ex){
