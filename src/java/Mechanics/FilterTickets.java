@@ -39,7 +39,7 @@ public class FilterTickets extends HttpServlet {
 
             request.setAttribute("tickets", tickets);
             
-            request.getRequestDispatcher("manage-service-ticket.jsp").forward(request, response);
+            request.getRequestDispatcher("/views/mechanic/manageserviceticket.jsp").forward(request, response);
         } catch (Exception e) {
             response.sendRedirect("error.jsp");
         }

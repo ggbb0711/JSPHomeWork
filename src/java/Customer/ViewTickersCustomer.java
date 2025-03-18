@@ -45,7 +45,7 @@ public class ViewTickersCustomer extends HttpServlet {
         } catch (Exception e) {
             response.sendRedirect("/views/mechanic/error.jsp");
         }
-        request.getRequestDispatcher("/views/mechanic/serviceticketscustomer.jsp").forward(request, response);
+        request.getRequestDispatcher("/views/mechanic/manageserviceticket.jsp").forward(request, response);
     }
 
  

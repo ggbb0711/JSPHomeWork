@@ -24,7 +24,7 @@ import utils.constant.Routes;
 @WebServlet(name = "ManageServices", urlPatterns = {Routes.MANAGE_SERVICE})
 public class ManageServices extends HttpServlet {
 
-    private static final String MANAGE_SERVICES_PAGE = "/views/mechanic/manage-services.jsp";
+    private static final String MANAGE_SERVICES_PAGE = "/views/mechanic/manageservice.jsp";
     private static final String ADD_SERVICE_CONTROLLER = "/mechanic/addService";
     private static final String EDIT_SERVICE_CONTROLLER = "/mechanic/editService";
     private static final String DELETE_SERVICE_CONTROLLER = "/mechanic/deleteService";
@@ -59,7 +59,6 @@ public class ManageServices extends HttpServlet {
                 case "delete":
                     url = request.getContextPath()+DELETE_SERVICE_CONTROLLER;
                     break;
-
             }
 
         } catch (Exception e) {

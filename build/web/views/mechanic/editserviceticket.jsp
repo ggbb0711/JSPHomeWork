@@ -17,7 +17,6 @@
         <link rel="stylesheet" type="text/css" href="source/custon-css/dashboard-custom.css">
     </head>
     <body>
-        <jsp:include page="common/side-bar-dashboard.jsp"></jsp:include>
 
             <!-- Main Content -->
             <div class="content">
@@ -77,7 +76,7 @@
                     </thead>
                     <tbody>
                         <c:forEach var="servicesMechanic" items="${servicesMechanic}">
-                        <form action="${pageContext.request.contextPath}/mechanic/editTicket" method="POST">
+                        <form action="/JSPHomeWork/mechanic/editTicket" method="POST">
                             <tr>
                                 <!-- Hiển thị Mechanic ID và Name, tránh load trùng -->
                                 <td>
@@ -128,7 +127,7 @@
             </div>
 
             <!-- Cancel Button -->
-            <a href="manage-service-tickets" class="btn btn-secondary">Cancel</a>
+            <a href="/JSPHomeWork/mechanic/manage-service-ticket" class="btn btn-secondary">Cancel</a>
 
         </div>
     </body>

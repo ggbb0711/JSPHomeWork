@@ -43,7 +43,7 @@ public class UpdateProfile extends HttpServlet {
             if (!customerDAO.updateCustomer(customer)) {
                 throw new Exception("Update failed!");
             }
-            response.sendRedirect("viewProfile");
+            response.sendRedirect("customer/viewProfile");
         } catch (Exception e) {
             response.sendRedirect("error.jsp");
         }
