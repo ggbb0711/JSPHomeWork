@@ -24,7 +24,7 @@ public class Routes {
     public static final String WISHLIST_SALE_PERSON = "/sales-person/wishlist";
     public static final String WISHLIST_DETAIL_SALE_PERSON = "/sales-person/wishlistDetail";
     public static final String LOGIN_SALE_PERSON = "/login/sales-person";
-    
+    public static final String LOGIN_CUSTOMER = "/login/customer";
     public static final String LOGOUT_SALE_PERSON = "/logout/sales-person";
     
     public static final String CUSTOMER = "/sales-person/customers";
@@ -41,4 +41,14 @@ public class Routes {
     public static final String READ_SERVICETICKET = "/sales-person/readServiceTicket";
     
     
+    public static final String VIEW_SERVICE_TICKET_CUSTOMER = "/customer/viewTickets";
+    public static final String UPDATE_PROFILE = "/customer/updateProfile";
+    public static final String VIEW_PROFILE = "/customer/viewProfile";
+    public static final String ADD_SERVICE = "/mechanic/addService";
+    public static final String DELETE_SERVICE = "/mechanic/deleteService";
+    public static final String EDIT_SERVICE = "/mechanic/editService";
+    public static final String EDIT_TICKETS = "/mechanic/editTicket";
+    public static final String FILTER_TICKETS = "/mechanic/filterTickets";
+    public static final String MANAGE_SERVICE_TICKETS = "/mechanic/manage-service-ticket";
+    public static final String MANAGE_SERVICE = "/mechanic/manage-services";
 }
