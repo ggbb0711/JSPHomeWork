@@ -43,7 +43,7 @@ public class ViewProfile extends HttpServlet {
         } catch (Exception e) {
             response.sendRedirect("error.jsp");
         }
-        request.getRequestDispatcher("viewprofile.jsp").forward(request, response);
+        request.getRequestDispatcher("views/mechanic/viewprofile.jsp").forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

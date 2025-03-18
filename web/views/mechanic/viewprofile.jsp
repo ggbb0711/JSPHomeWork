@@ -106,14 +106,14 @@
                                     <h2>Personal Information</h2>
                                     <p><strong>Customer ID:</strong> ${infor.custID}</p>
 
-                                    <form id="profileForm" action="/JSPHomeWork/mechanic/ViewProfile" method="post">
+                                    <form id="profileForm" action="/JSPHomeWork/customer/ViewProfile" method="post">
                                         <div class="form-group">
                                             <label for="custName"><strong>Name:</strong></label>
                                             <input type="text" class="form-control" id="custName" name="custName" value="${infor.custName}" required>
                                         </div>
                                         <div class="form-group">
                                           
-                                            <input style="display: none" type="text" class="form-control"  name="customerId" value="${infor.custID}" required>
+                                            <input style="display: none" type="text" class="form-control"  name="customerID" value="${infor.custID}" required>
                                         </div>
                                         <div class="form-group">
                                             <label for="phone"><strong>Phone:</strong></label>
