@@ -56,15 +56,10 @@ public class WishlistDAO {
 
                 cn.commit();
                 rs = true;
+                cn.close();
             }    
         }catch(Exception e){
             e.printStackTrace();
-        }finally{
-            try {
-                if(cn!=null) cn.close();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
         }
         return rs;
     }

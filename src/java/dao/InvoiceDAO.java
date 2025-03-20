@@ -29,18 +29,28 @@ public class InvoiceDAO {
     public boolean createInvoice(ArrayList<SalesInvoice> invoices, int wishlistID){
         boolean result = true;
         Connection cn = null;
+        int id = 0;
         
         try {
             cn = DBUtils.getConnection();
             if(cn!=null){
                 cn.setAutoCommit(false);
+                String getLargestId = "Select top 1 invoiceID from SalesInvoice order by invoiceID desc";
                 String insertInvoiceSql = "INSERT INTO SalesInvoice(invoiceID,invoiceDate,salesID,carID,custID,revenue) "
                         + " VALUES(?,?,?,?,?,?)";
                 String checkWishlistSql = "UPDATE Wishlist SET isCompleted=1 WHERE id = ?";
                 
+                PreparedStatement psGetId = cn.prepareStatement(getLargestId);
+                ResultSet idTable = psGetId.executeQuery();
+                if(idTable!=null){
+                    idTable.next();
+                    id = idTable.getInt("invoiceID");
+                }
+                
+                
                 PreparedStatement psInsert = cn.prepareStatement(insertInvoiceSql);
                 for(SalesInvoice invoice:invoices){
-                    psInsert.setLong(1, invoice.getId());
+                    psInsert.setLong(1, ++id);
                     psInsert.setDate(2, invoice.getInvoiceDate());
                     psInsert.setLong(3, invoice.getSalesID());
                     psInsert.setLong(4, invoice.getCarID());

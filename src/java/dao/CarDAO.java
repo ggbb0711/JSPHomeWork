@@ -73,12 +73,14 @@ public class CarDAO {
                 st.setString(1, id);
                 ResultSet table = st.executeQuery();
                 if(table!=null){
-                    String carid = table.getString("carID");
-                    String serial = table.getString("serialNumber");
-                    String model = table.getString("model");
-                    String colour = table.getString("colour");
-                    String year = table.getString("year");
-                    car = new Car(Integer.parseInt(carid), serial, model, colour, Integer.parseInt(year));
+                    while(table.next()){
+                        String carid = table.getString("carID");
+                        String serial = table.getString("serialNumber");
+                        String model = table.getString("model");
+                        String colour = table.getString("colour");
+                        String year = table.getString("year");
+                        car = new Car(Long.parseLong(carid), serial, model, colour, Integer.parseInt(year));
+                    }
                 }
             }    
         }catch(Exception e){

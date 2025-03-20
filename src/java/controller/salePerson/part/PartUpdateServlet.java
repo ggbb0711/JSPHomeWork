@@ -96,6 +96,8 @@ public class PartUpdateServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        request.setCharacterEncoding("UTF-8");
+        response.setContentType("text/html;charset=UTF-8");
         String partID = request.getParameter("partID");
         String partName = request.getParameter("partName");
         String purchasePrice = request.getParameter("purchasePrice");

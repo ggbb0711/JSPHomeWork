@@ -49,8 +49,6 @@ public class createCarServlet extends HttpServlet {
             
             if(car!=null){
                 request.setAttribute("checkID", "Car ID already exist");
-                //request.getRequestDispatcher(Pages.CREATE_CAR_PAGE).forward(request, response);
-                //return;
             }else{
                 int result = d.createCar(carid, serialnum, model, colour, year);
                 
@@ -59,8 +57,9 @@ public class createCarServlet extends HttpServlet {
                 }else{
                     request.setAttribute("createCar", "Fail To Create");
                 }
-                request.getRequestDispatcher(Pages.CREATE_CAR_PAGE).forward(request, response);
+                
             }
+            request.getRequestDispatcher(Pages.CREATE_CAR_PAGE).forward(request, response);
         }
     }
 

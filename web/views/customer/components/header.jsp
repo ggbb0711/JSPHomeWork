@@ -20,6 +20,6 @@
                 shopping_cart
             </span>
         </a>
-        <p>Hello ${sessionScope.customer.getCustName()}, <a class="header-nav" href="#">LOGOUT</a></p>
+        <p>Hello ${sessionScope.customer.getCustName()}, <a class="header-nav" href="${pageContext.request.contextPath}">LOGOUT</a></p>
     </div>
 </header>

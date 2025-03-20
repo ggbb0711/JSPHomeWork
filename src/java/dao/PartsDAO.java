@@ -58,10 +58,8 @@ public class PartsDAO {
             Connection con = DBUtils.getConnection();
             PreparedStatement ps = con.prepareStatement(sqlQuery);
             // set params value to query
-            int paramIndex = 1;
             if(!partName.isEmpty()){
-                //Using setFloat would create number with incorrect precision
-                ps.setString(paramIndex++, "%"+partName+"%");
+                ps.setString(1, "%"+partName+"%");
             } 
 
             ResultSet rs = ps.executeQuery();
@@ -149,6 +147,7 @@ public class PartsDAO {
         
         try{
             Connection con = DBUtils.getConnection();
+            con.setAutoCommit(false);
             PreparedStatement deletePartsUsePs = con.prepareStatement(deletePartsUsedSqlQuery);
             PreparedStatement deletePartsPs = con.prepareStatement(deletePartsSqlQuery);
 
@@ -157,6 +156,7 @@ public class PartsDAO {
             
             deletePartsUsePs.executeUpdate();
             status = deletePartsPs.executeUpdate()>0;
+            con.commit();
             con.close();
         }
         catch (ClassNotFoundException ex) {

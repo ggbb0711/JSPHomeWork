@@ -105,7 +105,6 @@ public class WishlistDetailServlet extends HttpServlet {
             invoice.setInvoiceDate(new Date(System.currentTimeMillis()));
             invoice.setSalesID(Long.parseLong(salePerson.getId()));
             invoice.setCustID(custID);
-            invoice.setId(new Random().nextInt(500000));
             invoice.setCarID(Long.parseLong(carIDStr[i]));
             invoice.setRevenue(Double.parseDouble(carRevenue[i]));
             invoices.add(invoice);
