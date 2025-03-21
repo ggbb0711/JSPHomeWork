@@ -10,6 +10,7 @@ import dto.PartsDTO;
 import exceptions.InvalidDataException;
 import exceptions.ValidationException;
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.logging.Level;
@@ -48,15 +49,22 @@ public class PartsServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        request.setCharacterEncoding("UTF-8");
-        response.setContentType("text/html;charset=UTF-8");
-        String partName = (request.getParameter("partName")!=null)?request.getParameter("partName"):"";
-        
-        PartsDAO partsDAO = new PartsDAO();
-        ArrayList<Parts> parts = partsDAO.getParts(partName);
-
-        request.setAttribute("partList",parts);
-        request.getRequestDispatcher(Pages.PART_PAGE+"?partName="+((partName!=null)?partName:"")).forward(request,response);
+        try {
+            request.setCharacterEncoding("UTF-8");
+            response.setContentType("text/html;charset=UTF-8");
+            String partName = (request.getParameter("partName")!=null)?request.getParameter("partName"):"";
+            
+            PartsDAO partsDAO = new PartsDAO();
+            ArrayList<Parts> parts = partsDAO.getParts(partName);
+            
+            request.setAttribute("partList",parts);
+            request.getRequestDispatcher(Pages.PART_PAGE+"?partName="+((partName!=null)?partName:"")).forward(request,response);
+        } catch (SQLException | ClassNotFoundException ex) {
+            System.out.println(ex);
+            response.setStatus(500);
+            request.setAttribute("message", ex.getMessage());
+            request.getRequestDispatcher(Pages.INTERNAL_ERROR_SALE_PERSON_PAGE);
+        }
     }
     
     @Override

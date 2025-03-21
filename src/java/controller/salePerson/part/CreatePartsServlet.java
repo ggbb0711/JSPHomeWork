@@ -11,6 +11,7 @@ import exceptions.InvalidDataException;
 import exceptions.ValidationException;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -108,8 +109,11 @@ public class CreatePartsServlet extends HttpServlet {
             request.setAttribute("invalid-data-exception", ex.getMessage());
             request.setAttribute("formData", formData);
             request.getRequestDispatcher(Pages.CREATE_PART_PAGE).forward(request, response);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(PartsServlet.class.getName()).log(Level.SEVERE, null, ex);
+        }catch (SQLException | ClassNotFoundException ex) {
+            System.out.println(ex);
+            response.setStatus(500);
+            request.setAttribute("message", ex.getMessage());
+            request.getRequestDispatcher(Pages.INTERNAL_ERROR_SALE_PERSON_PAGE);
         }
     }
 

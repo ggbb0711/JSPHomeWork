@@ -8,6 +8,7 @@ package controller.salePerson.part;
 import dao.PartsDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.SQLException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -68,12 +69,14 @@ public class DeletePartServlet extends HttpServlet {
         
         try{
             PartsDAO partsDAO = new PartsDAO();
-            boolean hasDeleted = partsDAO.delete(Long.parseLong(partId));
+            partsDAO.delete(Long.parseLong(partId));
             response.sendRedirect(request.getHeader("Referer"));
         }
-        catch(Exception ex){
+        catch (SQLException | ClassNotFoundException ex) {
             System.out.println(ex);
-            request.getRequestDispatcher(Pages.PART_PAGE).forward(request,response);
+            response.setStatus(500);
+            request.setAttribute("message", ex.getMessage());
+            request.getRequestDispatcher(Pages.INTERNAL_ERROR_SALE_PERSON_PAGE);
         }
     }
 

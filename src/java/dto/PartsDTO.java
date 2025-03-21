@@ -7,6 +7,7 @@ package dto;
 
 import dao.PartsDAO;
 import exceptions.ValidationException;
+import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -59,7 +60,7 @@ public class PartsDTO{
         }
     }
 
-    public void validate() throws ValidationException {
+    public void validate() throws ValidationException, ClassNotFoundException, SQLException {
          HashMap<String,String> errors = new HashMap<>();
 
         //validate id
@@ -72,9 +73,7 @@ public class PartsDTO{
             if(partsDAO.getPartById(idValue)!=null) errors.put("partID", "Part ID has already existed");
         } catch (NumberFormatException e) {
             errors.put("partID", "Part ID must be an integer.");
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(PartsDTO.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        } 
          
         //validate name
         if (partName == null || partName.trim().isEmpty()) errors.put("partName", "Part name cannot be empty.");

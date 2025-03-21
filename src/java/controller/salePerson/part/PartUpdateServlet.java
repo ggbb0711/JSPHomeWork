@@ -10,7 +10,7 @@ import dto.PartsDTO;
 import exceptions.InvalidDataException;
 import exceptions.ValidationException;
 import java.io.IOException;
-import java.io.PrintWriter;
+import java.sql.SQLException;
 import java.util.HashMap;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -77,8 +77,14 @@ public class PartUpdateServlet extends HttpServlet {
             request.setAttribute("formData", formData);
             request.setAttribute("updating-part", updatingPart);
             request.getRequestDispatcher(Pages.UPDATE_PART_PAGE+"?partID="+partID).forward(request,response);
+        }catch (SQLException | ClassNotFoundException ex) {
+            System.out.println(ex);
+            response.setStatus(500);
+            request.setAttribute("message", ex.getMessage());
+            request.getRequestDispatcher(Pages.INTERNAL_ERROR_SALE_PERSON_PAGE);
         } catch (Exception e) {
             System.out.println(e);
+            response.setStatus(404);
             request.setAttribute("message", "The partId cannot be found");
             request.getRequestDispatcher(Pages.MISSING_404_ERROR_SALE_PARSON_PAGE).forward(request,response);
         }
@@ -122,8 +128,8 @@ public class PartUpdateServlet extends HttpServlet {
             // call DAO
             Parts part = new Parts(Integer.parseInt(partID),partName,Double.parseDouble(purchasePrice),Double.parseDouble(retailPrice));
             PartsDAO partsDAO = new PartsDAO();
-            Parts createdPart = partsDAO.update(part);
-            if (createdPart==null) {
+            boolean createdPart = partsDAO.update(part);
+            if (!createdPart) {
                 throw new InvalidDataException("Cannot update product to database!");
             } else {
                 response.sendRedirect(request.getContextPath()+Routes.PARTS);
@@ -141,6 +147,13 @@ public class PartUpdateServlet extends HttpServlet {
             request.setAttribute("updating-part", updatingPart);
             request.getRequestDispatcher(Pages.UPDATE_PART_PAGE+"?partID="+partID).forward(request, response);
         }
+        catch (SQLException | ClassNotFoundException ex) {
+            System.out.println(ex);
+            response.setStatus(500);
+            request.setAttribute("message", ex.getMessage());
+            request.getRequestDispatcher(Pages.INTERNAL_ERROR_SALE_PERSON_PAGE);
+        }
+        
     }
 
     /**
