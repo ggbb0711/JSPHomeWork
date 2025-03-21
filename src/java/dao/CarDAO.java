@@ -17,7 +17,7 @@ import model.Car;
 import mylib.DBUtils;
 
 public class CarDAO {
-    public ArrayList<Car> findCarNotInCarID(ArrayList<Long> carIdList){
+    public ArrayList<Car> findCarNotInCarID(ArrayList<Long> carIdList) throws SQLException, ClassNotFoundException{
                 ArrayList<Car> carFound = new ArrayList<>();
         String sql ="SELECT * FROM Cars";
         
@@ -34,25 +34,20 @@ public class CarDAO {
 
         
         Connection conn;
-        try {
-            conn = DBUtils.getConnection();
-            PreparedStatement ps = conn.prepareStatement(sql);
-           
-            for (int i = 0; i < carIdList.size(); i++) {
-                ps.setLong(i + 1, carIdList.get(i));
-            }
+        conn = DBUtils.getConnection();
+        PreparedStatement ps = conn.prepareStatement(sql);
 
-            ResultSet rs = ps.executeQuery();
-            
-            while(rs.next()){
-                Car car = new Car(rs.getLong("carID"),rs.getString("serialNumber"),rs.getString("model"),rs.getString("colour"),rs.getInt("year"));
-                carFound.add(car);
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(InvoiceDAO.class.getName()).log(Level.SEVERE, null, ex);
+        for (int i = 0; i < carIdList.size(); i++) {
+            ps.setLong(i + 1, carIdList.get(i));
         }
+
+        ResultSet rs = ps.executeQuery();
+
+        while(rs.next()){
+            Car car = new Car(rs.getLong("carID"),rs.getString("serialNumber"),rs.getString("model"),rs.getString("colour"),rs.getInt("year"));
+            carFound.add(car);
+        }
+        conn.close();
         return carFound;
     }
 

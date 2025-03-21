@@ -41,6 +41,7 @@ public class Pages {
     public static final String INVOICE_CUSTOMER_PAGE = "/views/customer/invoice/invoicePage.jsp";
     public static final String AVAILABLE_CAR_PAGE = "/views/customer/availableCar/availableCarPage.jsp";
     public static final String WISHLIST_CUSTOMER_PAGE = "/views/customer/wishlist/wishListPage.jsp";
+    public static final String INTERNAL_ERROR_CUSTOMER_PAGE = "/views/customer/500InternalServerError.jsp";
 
     //OTHERS
     public static final String FORBIDDEN_PAGE = "/views/403ForbiddenPage.jsp";

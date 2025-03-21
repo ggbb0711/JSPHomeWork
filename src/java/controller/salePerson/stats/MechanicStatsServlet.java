@@ -58,10 +58,11 @@ public class MechanicStatsServlet extends HttpServlet {
             ArrayList<TopMechanicData> topMechanicData = mechanicDAO.getTopMechanic();
             request.setAttribute("topMechanicData", topMechanicData);
             request.getRequestDispatcher(Pages.STATS_TOP_3_MECHANIC_PAGE).forward(request,response);
-        } catch (SQLException ex) {
-            Logger.getLogger(MechanicStatsServlet.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(MechanicStatsServlet.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException | ClassNotFoundException ex) {
+            System.out.println(ex);
+            response.setStatus(500);
+            request.setAttribute("message", ex);
+            request.getRequestDispatcher(Pages.INTERNAL_ERROR_SALE_PERSON_PAGE).forward(request, response);
         }
     }
 

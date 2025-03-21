@@ -45,7 +45,7 @@ public class MechanicDAO extends DBUtils {
 
     }
     
-    public  ArrayList<TopMechanicData> getTopMechanic(){
+    public  ArrayList<TopMechanicData> getTopMechanic()  throws SQLException, ClassNotFoundException {
         ArrayList<TopMechanicData> topMechanicDataList = new ArrayList<>();
         String query = "SELECT m.mechanicID, \n" +
             "       m.mechanicName, \n" +
@@ -64,30 +64,26 @@ public class MechanicDAO extends DBUtils {
             ")\n" +
             "ORDER BY ticketDone DESC";
 
-        try (Connection conn = DBUtils.getConnection();
-             PreparedStatement stmt = conn.prepareStatement(query)) {
-            ResultSet rs = stmt.executeQuery();
+        Connection conn = DBUtils.getConnection();
+        PreparedStatement stmt = conn.prepareStatement(query);
+        ResultSet rs = stmt.executeQuery();
 
-            while (rs.next()) {
-                int ticketDone = rs.getInt("ticketDone");
-                double averageRate = rs.getDouble("averageRate");
-                int totalHours = rs.getInt("totalHours");
-                
-                model.Mechanic mechanic = new model.Mechanic(rs.getLong("mechanicID"),rs.getString("mechanicName"));
-                TopMechanicData mechanicData = new TopMechanicData();
-                
-                mechanicData.setAverageRate(averageRate);
-                mechanicData.setTicketDone(ticketDone);
-                mechanicData.setTotalHours(totalHours);
-                mechanicData.setMechanic(mechanic);
-                
-                topMechanicDataList.add(mechanicData);
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(InvoiceDAO.class.getName()).log(Level.SEVERE, null, ex);
+        while (rs.next()) {
+            int ticketDone = rs.getInt("ticketDone");
+            double averageRate = rs.getDouble("averageRate");
+            int totalHours = rs.getInt("totalHours");
+
+            model.Mechanic mechanic = new model.Mechanic(rs.getLong("mechanicID"),rs.getString("mechanicName"));
+            TopMechanicData mechanicData = new TopMechanicData();
+
+            mechanicData.setAverageRate(averageRate);
+            mechanicData.setTicketDone(ticketDone);
+            mechanicData.setTotalHours(totalHours);
+            mechanicData.setMechanic(mechanic);
+
+            topMechanicDataList.add(mechanicData);
         }
+        conn.close();
 
         return topMechanicDataList;
     }

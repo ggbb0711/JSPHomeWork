@@ -7,6 +7,7 @@ package controller.salePerson.stats;
 
 import dao.PartUsedDAO;
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -50,10 +51,18 @@ public class PartUsedStatsServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        PartUsedDAO partUsedDAO = new PartUsedDAO();
-        ArrayList<PartUsed> partUsedData = partUsedDAO.getMostUsedParts();
-        request.setAttribute("partUsedData", partUsedData);
-        request.getRequestDispatcher(Pages.STATS_PARTS_USED_PAGE).forward(request,response);
+        try{
+            PartUsedDAO partUsedDAO = new PartUsedDAO();
+            ArrayList<PartUsed> partUsedData = partUsedDAO.getMostUsedParts();
+            request.setAttribute("partUsedData", partUsedData);
+            request.getRequestDispatcher(Pages.STATS_PARTS_USED_PAGE).forward(request,response);      
+        } catch (SQLException | ClassNotFoundException ex) {
+            System.out.println(ex);
+            response.setStatus(500);
+            request.setAttribute("message", ex);
+            request.getRequestDispatcher(Pages.INTERNAL_ERROR_SALE_PERSON_PAGE).forward(request, response);
+        }
+
     }
 
     /**

@@ -7,6 +7,7 @@ package controller.customer.wishlist;
 
 import dao.WishlistDAO;
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -66,17 +67,26 @@ public class CartServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        ArrayList<Car> cart = new ArrayList<>();
-        HttpSession session = request.getSession();
-        if(session.getAttribute("cartItems")!=null) cart = (ArrayList<Car>) session.getAttribute("cartItems");
-        Customer customer = (Customer) session.getAttribute("customer");
+        try{
+            ArrayList<Car> cart = new ArrayList<>();
+            HttpSession session = request.getSession();
+            if(session.getAttribute("cartItems")!=null) cart = (ArrayList<Car>) session.getAttribute("cartItems");
+            Customer customer = (Customer) session.getAttribute("customer");
 
-        if(cart.size()>0){
-            WishlistDAO wishlistDAO = new WishlistDAO();
-            if(!wishlistDAO.createWishlist(customer.getCustID(), cart)) request.setAttribute("wishlistMsg", "Failed to add to wishlist");
-            else session.setAttribute("cartItems",new ArrayList<>());
+            if(cart.size()>0){
+                WishlistDAO wishlistDAO = new WishlistDAO();
+                if(!wishlistDAO.createWishlist(customer.getCustID(), cart)) request.setAttribute("wishlistMsg", "Failed to add to wishlist");
+                else session.setAttribute("cartItems",new ArrayList<>());
+            }
+            request.getRequestDispatcher(Pages.WISHLIST_CUSTOMER_PAGE).forward(request, response);
         }
-        request.getRequestDispatcher(Pages.WISHLIST_CUSTOMER_PAGE).forward(request, response);
+        catch (SQLException | ClassNotFoundException ex) {
+            System.out.println(ex);
+            response.setStatus(500);
+            request.setAttribute("message", ex);
+            request.getRequestDispatcher(Pages.INTERNAL_ERROR_CUSTOMER_PAGE).forward(request, response);
+        }        
+        
     }
 
     /**

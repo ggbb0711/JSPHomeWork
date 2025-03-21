@@ -7,6 +7,7 @@ package controller.salePerson.stats;
 
 import dao.InvoiceDAO;
 import java.io.IOException;
+import java.sql.SQLException;
 import java.time.Year;
 import java.util.ArrayList;
 import javax.servlet.ServletException;
@@ -53,37 +54,45 @@ public class StatsServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        int currentYear = Year.now().getValue();
-        
-        Integer carSoldByYear = currentYear;
-        Integer carRevenueByYear =currentYear;
-        
         try{
-            carSoldByYear = Integer.parseInt(request.getParameter("carSoldByYear"));
-        }
-        catch(NumberFormatException ex){
-            System.out.println(ex);
-        }
-        
-        try{
-            carRevenueByYear = Integer.parseInt(request.getParameter("carRevenueByYear"));
-        }
-        catch(NumberFormatException ex){
-            System.out.println(ex);
-        }
-        
-        SalePerson salePerson =  (SalePerson) request.getSession().getAttribute("saleperson");
+            int currentYear = Year.now().getValue();
 
-        InvoiceDAO invoiceDAO = new InvoiceDAO();
-        
-        ArrayList<CarSoldData> carSoldDataList = invoiceDAO.getCarSoldByYear(Long.parseLong(salePerson.getId()),carSoldByYear);
-        ArrayList<CarRevenueData> carRevenueDataList = invoiceDAO.getCarRevenueByYear(Long.parseLong(salePerson.getId()),carRevenueByYear);
-        ArrayList<CarSoldData> carModelSoldDataList = invoiceDAO.getMostSoldCarModel(Long.parseLong(salePerson.getId()));
+            Integer carSoldByYear = currentYear;
+            Integer carRevenueByYear =currentYear;
 
-        request.setAttribute("carSoldDataList", carSoldDataList);
-        request.setAttribute("carRevenueDataList", carRevenueDataList);
-        request.setAttribute("carModelSoldDataList", carModelSoldDataList);
-        request.getRequestDispatcher(Pages.STATS_PAGE).forward(request,response);
+            try{
+                carSoldByYear = Integer.parseInt(request.getParameter("carSoldByYear"));
+            }
+            catch(NumberFormatException ex){
+                System.out.println(ex);
+            }
+
+            try{
+                carRevenueByYear = Integer.parseInt(request.getParameter("carRevenueByYear"));
+            }
+            catch(NumberFormatException ex){
+                System.out.println(ex);
+            }
+
+            SalePerson salePerson =  (SalePerson) request.getSession().getAttribute("saleperson");
+
+            InvoiceDAO invoiceDAO = new InvoiceDAO();
+
+            ArrayList<CarSoldData> carSoldDataList = invoiceDAO.getCarSoldByYear(Long.parseLong(salePerson.getId()),carSoldByYear);
+            ArrayList<CarRevenueData> carRevenueDataList = invoiceDAO.getCarRevenueByYear(Long.parseLong(salePerson.getId()),carRevenueByYear);
+            ArrayList<CarSoldData> carModelSoldDataList = invoiceDAO.getMostSoldCarModel(Long.parseLong(salePerson.getId()));
+
+            request.setAttribute("carSoldDataList", carSoldDataList);
+            request.setAttribute("carRevenueDataList", carRevenueDataList);
+            request.setAttribute("carModelSoldDataList", carModelSoldDataList);
+            request.getRequestDispatcher(Pages.STATS_PAGE).forward(request,response);
+        } catch (SQLException | ClassNotFoundException ex) {
+            System.out.println(ex);
+            response.setStatus(500);
+            request.setAttribute("message", ex);
+            request.getRequestDispatcher(Pages.INTERNAL_ERROR_SALE_PERSON_PAGE).forward(request, response);
+        }
+        
     }
 
     /**

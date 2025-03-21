@@ -7,6 +7,7 @@ package controller.customer.invoice;
 
 import dao.InvoiceDAO;
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -53,12 +54,21 @@ public class InvoiceServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        HttpSession session = request.getSession();
-        Customer customer = (Customer) session.getAttribute("customer");
-        InvoiceDAO invoiceDAO = new InvoiceDAO();
-        ArrayList<SalesInvoice> customerInvoices = invoiceDAO.getCarRevenueByUserID(customer.getCustID());
-        request.setAttribute("customerInvoices", customerInvoices);
-        request.getRequestDispatcher(Pages.INVOICE_CUSTOMER_PAGE).forward(request, response);
+        try{
+            HttpSession session = request.getSession();
+            Customer customer = (Customer) session.getAttribute("customer");
+            InvoiceDAO invoiceDAO = new InvoiceDAO();
+            ArrayList<SalesInvoice> customerInvoices = invoiceDAO.getCarRevenueByUserID(customer.getCustID());
+            request.setAttribute("customerInvoices", customerInvoices);
+            request.getRequestDispatcher(Pages.INVOICE_CUSTOMER_PAGE).forward(request, response);
+        }
+        catch (SQLException | ClassNotFoundException ex) {
+            System.out.println(ex);
+            response.setStatus(500);
+            request.setAttribute("message", ex);
+            request.getRequestDispatcher(Pages.INTERNAL_ERROR_CUSTOMER_PAGE).forward(request, response);
+        }
+
     }
 
     /**

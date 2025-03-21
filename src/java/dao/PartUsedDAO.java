@@ -22,35 +22,31 @@ import mylib.DBUtils;
  * @author NGHIA
  */
 public class PartUsedDAO {
-    public  ArrayList<PartUsed> getMostUsedParts(){
+    public  ArrayList<PartUsed> getMostUsedParts() throws SQLException, ClassNotFoundException{
         ArrayList<PartUsed> partUsedList = new ArrayList<>();
         String query = "SELECT p.*, SUM(pu.numberUsed) as numberUsed, SUM(pu.price) as totalPrice FROM Parts p" +
                     " JOIN PartsUsed pu ON p.partID = pu.partID" +
                     " GROUP BY p.partID, p.partName, p.purchasePrice, p.retailPrice" +
                     " ORDER BY numberUsed DESC";
 
-        try (Connection conn = DBUtils.getConnection();
-             PreparedStatement stmt = conn.prepareStatement(query)) {
-            ResultSet rs = stmt.executeQuery();
+        Connection conn = DBUtils.getConnection();
+        PreparedStatement stmt = conn.prepareStatement(query);
+        ResultSet rs = stmt.executeQuery();
 
-            while (rs.next()) {
-                int numberUsed = rs.getInt("numberUsed");
-                int totalPrice = rs.getInt("totalPrice");
-                
-                Parts part = new Parts(rs.getLong("partID"),rs.getString("partName"),rs.getInt("purchasePrice"),rs.getInt("retailPrice"));
-                PartUsed partUsed = new PartUsed();
-                
-                partUsed.setNumberUsed(numberUsed);
-                partUsed.setPrice(totalPrice);
-                partUsed.setPart(part);
-                
-                partUsedList.add(partUsed);
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(InvoiceDAO.class.getName()).log(Level.SEVERE, null, ex);
+        while (rs.next()) {
+            int numberUsed = rs.getInt("numberUsed");
+            int totalPrice = rs.getInt("totalPrice");
+
+            Parts part = new Parts(rs.getLong("partID"),rs.getString("partName"),rs.getInt("purchasePrice"),rs.getInt("retailPrice"));
+            PartUsed partUsed = new PartUsed();
+
+            partUsed.setNumberUsed(numberUsed);
+            partUsed.setPrice(totalPrice);
+            partUsed.setPart(part);
+
+            partUsedList.add(partUsed);
         }
+        conn.close();
 
         return partUsedList;
     }
