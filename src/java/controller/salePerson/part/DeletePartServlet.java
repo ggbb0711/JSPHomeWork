@@ -75,8 +75,8 @@ public class DeletePartServlet extends HttpServlet {
         catch (SQLException | ClassNotFoundException ex) {
             System.out.println(ex);
             response.setStatus(500);
-            request.setAttribute("message", ex.getMessage());
-            request.getRequestDispatcher(Pages.INTERNAL_ERROR_SALE_PERSON_PAGE);
+            request.setAttribute("message", ex);
+            request.getRequestDispatcher(Pages.INTERNAL_ERROR_SALE_PERSON_PAGE).forward(request, response);
         }
     }
 

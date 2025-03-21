@@ -80,8 +80,13 @@ public class PartUpdateServlet extends HttpServlet {
         }catch (SQLException | ClassNotFoundException ex) {
             System.out.println(ex);
             response.setStatus(500);
-            request.setAttribute("message", ex.getMessage());
-            request.getRequestDispatcher(Pages.INTERNAL_ERROR_SALE_PERSON_PAGE);
+            request.setAttribute("message", ex);
+            request.getRequestDispatcher(Pages.INTERNAL_ERROR_SALE_PERSON_PAGE).forward(request, response);
+        } catch (NumberFormatException e) {
+            System.out.println(e);
+            response.setStatus(404);
+            request.setAttribute("message", "The partId cannot be found");
+            request.getRequestDispatcher(Pages.MISSING_404_ERROR_SALE_PARSON_PAGE).forward(request,response);
         } catch (Exception e) {
             System.out.println(e);
             response.setStatus(404);
@@ -150,8 +155,8 @@ public class PartUpdateServlet extends HttpServlet {
         catch (SQLException | ClassNotFoundException ex) {
             System.out.println(ex);
             response.setStatus(500);
-            request.setAttribute("message", ex.getMessage());
-            request.getRequestDispatcher(Pages.INTERNAL_ERROR_SALE_PERSON_PAGE);
+            request.setAttribute("message", ex);
+            request.getRequestDispatcher(Pages.INTERNAL_ERROR_SALE_PERSON_PAGE).forward(request, response);
         }
         
     }
